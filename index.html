@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayco Energy · Chaleur industrielle décarbonée, moins chère</title>
+<meta name="description" content="Mayco Energy installe, finance et pilote une pompe à chaleur haute température et un stockage sur votre site industriel. Vous ne payez que la chaleur livrée, moins chère et décarbonée.">
+<meta property="og:title" content="Mayco Energy · Chaleur industrielle décarbonée, moins chère">
+<meta property="og:description" content="Pompe à chaleur haute température, stockage et pilotage intelligent, financés et exploités par Mayco. Vous ne payez que la chaleur livrée.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maycoenergy.com">
+<link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke-linecap="round"%3E%3Cpath d="M3 12 C6 9.5 9 10.5 11.8 13.25" stroke="%232563EB" stroke-width="3.4"/%3E%3Cpath d="M14.6 11 V21 M17.4 11 V21" stroke="%23F59E0B" stroke-width="2.6"/%3E%3Cpath d="M20.2 18.75 C23 21.5 26 22.5 29 20" stroke="%23FF6B35" stroke-width="3.4"/%3E%3C/svg%3E'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1B33;
+    --bleu:#2563EB;
+    --ambre:#F59E0B;
+    --corail:#FF6B35;
+    --txt:#0F1B33;
+    --txt-soft:#45526B;
+    --bg:#FFFFFF;
+    --bg-soft:#F6F8FB;
+    --line:#E5EAF2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    color:var(--txt);background:var(--bg);
+    line-height:1.6;font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .nav .logo svg{height:26px;width:auto;display:block}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+  .nav-links a{color:var(--txt-soft);text-decoration:none;font-size:15px;font-weight:500}
+  .nav-links a:hover{color:var(--navy)}
+  .btn{
+    display:inline-block;padding:10px 20px;border-radius:10px;
+    font-weight:600;font-size:15px;text-decoration:none;
+    transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--navy);color:#fff;box-shadow:0 1px 2px rgba(15,27,51,.2)}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--navy);background:#fff}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 40px;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(560px 300px at 12% 0%, rgba(37,99,235,.07), transparent 65%),
+      radial-gradient(560px 300px at 88% 10%, rgba(255,107,53,.07), transparent 65%);
+  }
+  .hero .wrap{position:relative}
+  .hero h1{
+    font-size:clamp(34px,5.2vw,54px);line-height:1.12;
+    font-weight:800;letter-spacing:-.02em;max-width:820px;
+  }
+  .grad{
+    background:linear-gradient(90deg,var(--bleu) 0%,var(--ambre) 55%,var(--corail) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    margin-top:20px;font-size:clamp(17px,2vw,20px);
+    color:var(--txt-soft);max-width:680px;
+  }
+  .hero-ctas{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero-ctas .btn{padding:13px 26px;font-size:16px}
+  .chips{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:999px;padding:8px 16px;
+    font-size:14px;font-weight:600;color:var(--navy);
+  }
+  .chip .dot{width:8px;height:8px;border-radius:50%}
+
+  /* ---------- schéma ---------- */
+  .schema-outer{margin:56px 0 8px;overflow-x:auto}
+  .schema{min-width:740px}
+  .schema svg{width:100%;height:auto;display:block}
+  .schema text{font-family:'Inter',system-ui,sans-serif}
+  .flow-anim{stroke-dasharray:10 7;animation:flow 1.6s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-17}}
+  @media (prefers-reduced-motion:reduce){.flow-anim{animation:none}}
+
+  /* ---------- sections ---------- */
+  section{padding:80px 0}
+  .kicker{
+    text-transform:uppercase;letter-spacing:.12em;font-size:13px;
+    font-weight:700;color:var(--bleu);margin-bottom:12px;
+  }
+  h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.015em;line-height:1.2;max-width:640px}
+  .sub{margin-top:14px;color:var(--txt-soft);max-width:640px}
+
+  /* piliers */
+  .cards{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .card{
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:16px;padding:28px;
+  }
+  .card .icon{
+    width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+  .card p{color:var(--txt-soft);font-size:15.5px}
+
+  /* fonctionnement */
+  .alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px;counter-reset:step}
+  .step{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:26px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;margin-bottom:14px;
+    background:var(--navy);color:#fff;font-weight:700;font-size:16px;
+  }
+  .step h3{font-size:18px;font-weight:700;margin-bottom:6px}
+  .step p{color:var(--txt-soft);font-size:15.5px}
+
+  /* modèle */
+  .modele-grid{margin-top:44px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start}
+  .modele-grid p+p{margin-top:14px}
+  .modele-grid p{color:var(--txt-soft)}
+  .modele-grid p strong{color:var(--navy)}
+  .you-get{
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:16px;padding:28px;
+  }
+  .you-get h3{font-size:17px;font-weight:700;margin-bottom:16px}
+  .you-get ul{list-style:none}
+  .you-get li{
+    padding:10px 0 10px 32px;position:relative;
+    color:var(--txt-soft);font-size:15.5px;
+    border-bottom:1px solid var(--line);
+  }
+  .you-get li:last-child{border-bottom:none}
+  .you-get li::before{
+    content:"";position:absolute;left:0;top:16px;
+    width:18px;height:18px;border-radius:50%;
+    background:
+      linear-gradient(#fff,#fff) padding-box,
+      linear-gradient(135deg,var(--bleu),var(--corail)) border-box;
+    border:2px solid transparent;
+  }
+  .you-get li::after{
+    content:"";position:absolute;left:5px;top:21px;
+    width:8px;height:5px;
+    border-left:2px solid var(--corail);border-bottom:2px solid var(--corail);
+    transform:rotate(-45deg);
+  }
+
+  /* contact */
+  .contact{padding:88px 0}
+  .contact-box{
+    background:var(--navy);border-radius:24px;color:#fff;
+    padding:clamp(36px,6vw,64px);text-align:center;position:relative;overflow:hidden;
+  }
+  .contact-box::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(420px 240px at 8% 110%, rgba(96,165,250,.18), transparent 70%),
+      radial-gradient(420px 240px at 92% -10%, rgba(255,122,71,.18), transparent 70%);
+  }
+  .contact-box>*{position:relative}
+  .contact-box h2{color:#fff;max-width:none}
+  .contact-box p{margin:16px auto 0;max-width:620px;color:#C4CDDF}
+  .contact-box .btn{margin-top:30px;background:#fff;color:var(--navy);padding:14px 30px;font-size:16px}
+  .contact-box .mail{margin-top:18px;font-size:15px;color:#8FA0BE}
+  .contact-box .mail a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:36px 0;background:var(--bg)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .logo svg{height:22px;width:auto;display:block}
+  .foot small{color:var(--txt-soft);font-size:14px}
+  .foot a{color:var(--txt-soft);text-decoration:none}
+  .foot a:hover{color:var(--navy)}
+
+  /* responsive */
+  @media (max-width:820px){
+    .nav-links{display:none}
+    .cards,.steps{grid-template-columns:1fr}
+    .modele-grid{grid-template-columns:1fr}
+    section{padding:60px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="Mayco Energy">
+      <!-- wordmark mayco, « o » stratifié -->
+      <svg viewBox="0 0 334 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mayco">
+        <defs>
+          <linearGradient id="strat-h" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FF6B35"/><stop offset="0.45" stop-color="#FF6B35"/>
+            <stop offset="0.45" stop-color="#F59E0B"/><stop offset="0.7" stop-color="#F59E0B"/>
+            <stop offset="0.7" stop-color="#2563EB"/><stop offset="1" stop-color="#2563EB"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="#0F1B33" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 82 V51 A13 13 0 0 1 46 51 V82 M46 51 A13 13 0 0 1 72 51 V82"/>
+          <circle cx="110" cy="60" r="22"/>
+          <path d="M132 38 V82"/>
+          <path d="M152 38 L171.5 82 M191 38 L161 106"/>
+          <path d="M243.6 44.4 A22 22 0 1 0 243.6 75.6"/>
+        </g>
+        <circle cx="292" cy="60" r="28" fill="url(#strat-h)"/>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#solution">La solution</a></li>
+      <li><a href="#fonctionnement">Comment ça marche</a></li>
+      <li><a href="#modele">Le modèle</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">Étudier mon site</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="wrap">
+      <h1>Votre chaleur industrielle,<br><span class="grad">moins chère et décarbonée.</span></h1>
+      <p class="lead">
+        Mayco Energy installe, finance et pilote une pompe à chaleur haute température
+        couplée à un stockage sur votre site. Vous ne payez que la chaleur livrée.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Étudier mon site</a>
+        <a class="btn btn-ghost" href="#fonctionnement">Comment ça marche</a>
+      </div>
+      <div class="chips">
+        <span class="chip"><span class="dot" style="background:var(--bleu)"></span>0&nbsp;€ d'investissement</span>
+        <span class="chip"><span class="dot" style="background:var(--ambre)"></span>Votre chaudière gaz conservée en secours</span>
+        <span class="chip"><span class="dot" style="background:var(--corail)"></span>Facturation à la chaleur livrée</span>
+      </div>
+
+      <!-- schéma de flux -->
+      <div class="schema-outer">
+        <div class="schema">
+          <svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="Schéma : l'électricité achetée aux meilleures heures alimente la pompe à chaleur, la chaleur est stockée dans le ballon puis livrée au process ; la chaudière gaz reste en secours.">
+            <!-- pilotage -->
+            <path d="M70 46 C240 8, 640 8, 810 46" fill="none" stroke="#0F1B33" stroke-width="1.6" stroke-dasharray="5 6" opacity=".5"/>
+            <rect x="352" y="6" width="176" height="30" rx="15" fill="#0F1B33"/>
+            <text x="440" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Pilotage intelligent Mayco</text>
+
+            <!-- flux électricité -->
+            <path class="flow-anim" d="M30 130 C60 105, 90 155, 120 130 S 180 105 210 128" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+            <text x="120" y="175" text-anchor="middle" font-size="14" font-weight="600" fill="#0F1B33">Électricité</text>
+            <text x="120" y="194" text-anchor="middle" font-size="12.5" fill="#45526B">achetée aux meilleures heures</text>
+
+            <!-- PAC -->
+            <rect x="232" y="92" width="76" height="76" rx="16" fill="#fff" stroke="#0F1B33" stroke-width="2.4"/>
+            <path d="M262 110 V150 M278 110 V150" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+            <text x="270" y="192" text-anchor="middle" font-size="14" font-weight="600" fill="#0F1B33">Pompe à chaleur</text>
+            <text x="270" y="211" text-anchor="middle" font-size="12.5" fill="#45526B">haute température</text>
+
+            <!-- liaison PAC -> ballon -->
+            <path class="flow-anim" d="M318 130 H400" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+
+            <!-- ballon stratifié -->
+            <g transform="translate(408,88)">
+              <defs><clipPath id="tank-s"><path d="M2 74 V26 A32 32 0 0 1 66 26 V74 A8 8 0 0 1 58 82 H10 A8 8 0 0 1 2 74 Z"/></clipPath></defs>
+              <g clip-path="url(#tank-s)">
+                <rect x="2" y="-8" width="64" height="38" fill="#FF6B35"/>
+                <path d="M2 30 H66 V48 Q50 54 34 48 Q18 42 2 48 Z" fill="#F59E0B"/>
+                <path d="M2 48 Q18 42 34 48 Q50 54 66 48 V82 H2 Z" fill="#2563EB"/>
+              </g>
+              <path d="M2 74 V26 A32 32 0 0 1 66 26 V74 A8 8 0 0 1 58 82 H10 A8 8 0 0 1 2 74 Z" fill="none" stroke="#0F1B33" stroke-width="2.4"/>
+            </g>
+            <text x="442" y="192" text-anchor="middle" font-size="14" font-weight="600" fill="#0F1B33">Ballon de stockage</text>
+            <text x="442" y="211" text-anchor="middle" font-size="12.5" fill="#45526B">charge quand l'électricité est bon marché</text>
+
+            <!-- flux chaleur -->
+            <path class="flow-anim" d="M484 118 C520 96, 560 140, 600 118 S 670 98 700 116" fill="none" stroke="#FF6B35" stroke-width="5" stroke-linecap="round"/>
+            <text x="592" y="88" text-anchor="middle" font-size="14" font-weight="600" fill="#FF6B35">Chaleur livrée en continu</text>
+
+            <!-- gaz en secours -->
+            <path d="M540 226 H716" fill="none" stroke="#45526B" stroke-width="2.6" stroke-dasharray="7 6" stroke-linecap="round"/>
+            <text x="530" y="231" text-anchor="end" font-size="12.5" fill="#45526B">Votre chaudière gaz, en secours</text>
+
+            <!-- process / usine -->
+            <g transform="translate(712,87)">
+              <path d="M10 118 V44 L46 66 V44 L82 66 V44 L118 66 V118 Z" transform="scale(0.7)" fill="#F6F8FB" stroke="#0F1B33" stroke-width="3.4" stroke-linejoin="round"/>
+              <path d="M22 44 V16 H38 V34" transform="scale(0.7)" fill="none" stroke="#0F1B33" stroke-width="3.4" stroke-linejoin="round"/>
+            </g>
+            <text x="767" y="192" text-anchor="middle" font-size="14" font-weight="600" fill="#0F1B33">Votre process</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PILIERS ================= -->
+  <section id="solution">
+    <div class="wrap">
+      <div class="kicker">La solution</div>
+      <h2>Une chaleur meilleure sur les quatre points qui comptent.</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon" style="background:rgba(37,99,235,.1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L8 11 L12 14 L21 5"/><path d="M15 5 H21 V11"/></svg>
+          </div>
+          <h3>Moins chère</h3>
+          <p>Le prix de l'électricité change chaque heure. Notre pilotage fait tourner la pompe à chaleur quand il est au plus bas et stocke la chaleur dans le ballon. Vous profitez des meilleures heures du marché, sans y penser.</p>
+        </div>
+        <div class="card">
+          <div class="icon" style="background:rgba(37,99,235,.1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C8 8, 5 11, 5 15 a7 7 0 0 0 14 0 c0-4-3-7-7-12Z"/><path d="M9 15 a3 3 0 0 0 3 3"/></svg>
+          </div>
+          <h3>Décarbonée</h3>
+          <p>Une pompe à chaleur restitue plusieurs kWh de chaleur pour chaque kWh d'électricité consommé. En électrifiant votre chaleur, vous réduisez fortement les émissions de votre site et avancez concrètement votre trajectoire bas carbone.</p>
+        </div>
+        <div class="card">
+          <div class="icon" style="background:rgba(245,158,11,.12)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 7 V12 C20 16.5 16.5 20 12 21 C7.5 20 4 16.5 4 12 V7 Z"/><path d="M9 12 l2 2 4-4.5"/></svg>
+          </div>
+          <h3>Dérisquée</h3>
+          <p>Votre chaudière gaz reste en place. À chaque instant, le pilotage choisit l'énergie la plus compétitive, électricité ou gaz. Deux énergies au lieu d'une : vous n'êtes plus exposé aux crises de prix d'un seul marché.</p>
+        </div>
+        <div class="card">
+          <div class="icon" style="background:rgba(255,107,53,.1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M8 8 V6 a4 4 0 0 1 8 0 v2"/><path d="M9 14.5 l2 2 4-4.5"/></svg>
+          </div>
+          <h3>Clé en main</h3>
+          <p>Mayco finance, installe, exploite et maintient l'installation sur votre site. Zéro investissement, zéro charge d'exploitation : vous signez un contrat de chaleur, nous nous occupons du reste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FONCTIONNEMENT ================= -->
+  <section id="fonctionnement" class="alt">
+    <div class="wrap">
+      <div class="kicker">Comment ça marche</div>
+      <h2>Une PAC, un ballon, et des algorithmes qui suivent le marché pour vous.</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>La pompe à chaleur produit votre chaleur</h3>
+          <p>Une pompe à chaleur haute température, dimensionnée pour votre process, produit votre chaleur à partir d'électricité, avec un rendement très supérieur à une chaudière.</p>
+        </div>
+        <div class="step">
+          <h3>Le ballon la stocke</h3>
+          <p>La chaleur produite pendant les heures d'électricité bon marché est stockée dans un ballon d'eau chaude, puis restituée quand votre process en a besoin.</p>
+        </div>
+        <div class="step">
+          <h3>Le pilotage arbitre en continu</h3>
+          <p>Nos algorithmes suivent les prix de marché heure par heure et décident : produire, stocker, ou basculer sur votre chaudière gaz si c'est elle la plus économique.</p>
+        </div>
+        <div class="step">
+          <h3>Vous payez la chaleur livrée</h3>
+          <p>Un compteur d'énergie mesure la chaleur réellement consommée. Une facture, un interlocuteur, aucune surprise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODÈLE ================= -->
+  <section id="modele">
+    <div class="wrap">
+      <div class="kicker">Le modèle</div>
+      <h2>La chaleur comme un service : nous investissons, vous économisez.</h2>
+      <div class="modele-grid">
+        <div>
+          <p><strong>Mayco possède et exploite l'installation.</strong> La pompe à chaleur, le ballon et le pilotage sont financés par Mayco et installés sur votre site, en complément de votre chaudière existante.</p>
+          <p>Vous n'achetez pas un équipement, vous achetez de la chaleur : un contrat de fourniture, une facturation au kWh de chaleur livré. Pas d'investissement à porter, pas de risque technique, pas de compétence énergie à internaliser.</p>
+          <p>Tout commence par une étude de faisabilité sur vos données réelles de consommation : nous rejouons vos douze derniers mois heure par heure, face aux prix de marché constatés, et nous chiffrons l'économie sur votre cas. Pas de promesse générique.</p>
+        </div>
+        <div class="you-get">
+          <h3>Ce que ça change pour vous</h3>
+          <ul>
+            <li>Aucun investissement, aucun financement à monter</li>
+            <li>Exploitation et maintenance assurées par Mayco</li>
+            <li>Votre chaudière gaz conservée en secours</li>
+            <li>Une économie chiffrée sur vos données avant de signer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <h2>Votre site est-il fait pour Mayco&nbsp;?</h2>
+        <p>
+          Vous consommez du gaz pour produire de la chaleur, dans l'industrie, l'agroalimentaire,
+          la méthanisation ou le traitement de l'eau&nbsp;? Envoyez-nous vos douze derniers mois de
+          factures d'énergie : nous chiffrons votre économie sur vos données réelles, sans engagement.
+        </p>
+        <a class="btn" href="mailto:contact@maycoenergy.com?subject=%C3%89tude%20de%20faisabilit%C3%A9%20Mayco">Demander une étude de faisabilité</a>
+        <div class="mail">ou écrivez-nous : <a href="mailto:contact@maycoenergy.com">contact@maycoenergy.com</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#" aria-label="Mayco Energy">
+      <svg viewBox="0 0 334 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mayco">
+        <defs>
+          <linearGradient id="strat-f" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FF6B35"/><stop offset="0.45" stop-color="#FF6B35"/>
+            <stop offset="0.45" stop-color="#F59E0B"/><stop offset="0.7" stop-color="#F59E0B"/>
+            <stop offset="0.7" stop-color="#2563EB"/><stop offset="1" stop-color="#2563EB"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="#0F1B33" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 82 V51 A13 13 0 0 1 46 51 V82 M46 51 A13 13 0 0 1 72 51 V82"/>
+          <circle cx="110" cy="60" r="22"/>
+          <path d="M132 38 V82"/>
+          <path d="M152 38 L171.5 82 M191 38 L161 106"/>
+          <path d="M243.6 44.4 A22 22 0 1 0 243.6 75.6"/>
+        </g>
+        <circle cx="292" cy="60" r="28" fill="url(#strat-f)"/>
+      </svg>
+    </a>
+    <small>© 2026 Mayco Energy · <a href="mailto:contact@maycoenergy.com">contact@maycoenergy.com</a></small>
+  </div>
+</footer>
+
+</body>
+</html>
