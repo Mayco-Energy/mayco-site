@@ -474,11 +474,11 @@
       var narrow = W < 700;
       for (var y = gap * 0.6; y < H; y += gap) {
         var vy = y / H;
-        var my = 1 - smooth(narrow ? 0.1 : 0.26, narrow ? 0.28 : 0.5, vy);
+        var my = 1 - smooth(narrow ? 0.02 : 0.26, narrow ? 0.1 : 0.5, vy);
         for (var x = gap * 0.6; x < W; x += gap) {
           var dx = x - mouse.x, dy = y - mouse.y;
           var h = mouse.heat * Math.exp(-(dx * dx + dy * dy) / 16000);
-          var m = Math.max(my * (narrow ? 0.45 : smooth(0.38, 0.82, x / W)), h * 0.85);
+          var m = Math.max(my * (narrow ? 0.4 : smooth(0.38, 0.82, x / W)), h * 0.85);
           if (m < 0.03) continue;
           var f = 0.5 + 0.2 * Math.sin(x * 0.0042 + t * 1.3) * Math.cos(y * 0.0065 - t) +
             0.16 * Math.sin((x - y) * 0.0031 + t * 0.7) + (0.35 - vy) * 0.5 + h * 0.55;
@@ -620,6 +620,18 @@
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stop(); else if (onScreen) start();
     });
+  }
+
+  /* ---------- Démarrage : la ligne se remplit à l'arrivée ---------- */
+
+  var onboard = document.querySelector("[data-onboard]");
+  if (onboard && !reduceMotion && "IntersectionObserver" in window) {
+    var obIo = new IntersectionObserver(function (e) {
+      if (!e[0].isIntersecting) return;
+      obIo.disconnect();
+      onboard.classList.add("is-running");
+    }, { threshold: 0.4 });
+    obIo.observe(onboard);
   }
 
   /* ---------- Économies : simulateur ---------- */
