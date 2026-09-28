@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page introuvable | Mayco Energy</title>
+<meta name="description" content="Cette page n'existe pas ou a été déplacée.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a1122">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+  .lost { min-height: 100vh; display: grid; align-content: center; padding-block: 64px; }
+  .lost .wrap { display: grid; gap: 28px; max-width: 760px; }
+  .lost .code { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.14em; color: var(--amber); text-transform: uppercase; }
+  .lost h1 { font-size: var(--fs-hero); line-height: 0.98; font-stretch: 118%; font-weight: 760; letter-spacing: -0.03em; }
+  .lost .band-temp { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); }
+  .lost .band-temp i { flex: 1; max-width: 220px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--cold), var(--amber), var(--heat)); position: relative; }
+  .lost .band-temp i::after { content: ""; position: absolute; right: -6px; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--heat); transform: translateY(-50%); box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.25); }
+  .lost .en { color: var(--muted); font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<main class="band band-night lost">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Mayco Energy, accueil">
+      <svg viewBox="0 0 334 132" role="img" aria-hidden="true" style="height: 26px;">
+        <defs><linearGradient id="gm-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6B35"/><stop offset="0.45" stop-color="#FF6B35"/><stop offset="0.45" stop-color="#F5A524"/><stop offset="0.7" stop-color="#F5A524"/><stop offset="0.7" stop-color="#3B7BF0"/><stop offset="1" stop-color="#3B7BF0"/></linearGradient></defs>
+        <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"><path d="M20 82 V51 A13 13 0 0 1 46 51 V82 M46 51 A13 13 0 0 1 72 51 V82"/><circle cx="110" cy="60" r="22"/><path d="M132 38 V82"/><path d="M152 38 L171.5 82 M191 38 L161 106"/><path d="M243.6 44.4 A22 22 0 1 0 243.6 75.6"/></g>
+        <circle cx="292" cy="60" r="28" fill="url(#gm-h)"/>
+      </svg>
+    </a>
+    <p class="code">Erreur 404</p>
+    <h1>Cette page est sortie de sa plage<span class="dot" aria-hidden="true"></span></h1>
+    <p class="band-temp"><span>consigne</span><i aria-hidden="true"></i><span>hors plage</span></p>
+    <p class="lead">L'adresse demandée n'existe pas ou a été déplacée. Le reste du site, lui, tourne normalement.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/">Revenir à l'accueil</a>
+      <a class="btn btn-ghost" href="/#contact">Nous contacter</a>
+    </div>
+    <p class="en" lang="en">Page not found. <a href="/en/">Go to the English home page</a>.</p>
+  </div>
+</main>
+</body>
+</html>

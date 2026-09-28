@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF6B35"/><stop offset="0.45" stop-color="#FF6B35"/>
+      <stop offset="0.45" stop-color="#F5A524"/><stop offset="0.7" stop-color="#F5A524"/>
+      <stop offset="0.7" stop-color="#3B7BF0"/><stop offset="1" stop-color="#3B7BF0"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#g)"/>
+</svg>
