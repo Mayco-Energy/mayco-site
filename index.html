@@ -55,12 +55,10 @@
       </svg>
     </a>
     <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="#constat">Constat</a>
-      <a href="#solution">Solution</a>
-      <a href="#methode">Méthode</a>
-      <a href="#secteurs">Secteurs</a>
-      <a href="#cas-type">Cas type</a>
-      <a href="#equipe">Équipe</a>
+      <a href="#solution">Comment ça marche</a>
+      <a href="#garanties">Garanties</a>
+      <a href="#economies">Économies</a>
+      <a href="#faq">Questions</a>
       <a class="btn btn-primary nav-cta" href="#contact">Estimer mes économies</a>
     </nav>
     <div class="header-tools">
@@ -77,6 +75,7 @@
 
   <!-- HERO -->
   <section class="band band-night hero" id="haut" aria-labelledby="hero-title">
+    <canvas class="hero-field" data-field aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-grid">
         <div>
@@ -85,7 +84,7 @@
           <p class="lead">Mayco pilote les groupes froids et les pompes à chaleur <strong>déjà installés</strong> sur votre site pour qu'ils consomment l'électricité aux heures où elle coûte le moins. L'inertie de vos marchandises, de vos bâches et de vos ballons sert de stockage. Le process garde exactement le froid et la chaleur dont il a besoin.</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#contact">Estimer mes économies <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-            <a class="btn btn-ghost" href="#methode">Comment ça marche</a>
+            <a class="btn btn-ghost" href="#solution">Comment ça marche</a>
           </div>
         </div>
         <div class="plates" aria-label="L'offre en trois points">
@@ -116,7 +115,7 @@
           </div>
         </div>
         <div class="synoptic-body">
-          <div class="plot" data-plot aria-hidden="true"></div>
+          <div class="plot" data-plot tabindex="0" role="group" aria-label="Graphique heure par heure. Survolez-le ou utilisez les flèches gauche et droite pour parcourir la journée."><div class="plot-tip" data-tip role="status" hidden></div></div>
           <div class="readouts" aria-live="polite">
             <div class="readout">
               <span class="readout-label">Coût d'achat spot du jour</span>
@@ -147,85 +146,23 @@
     </div>
   </section>
 
-  <!-- CONSTAT -->
-  <section class="band band-frost section" id="constat" aria-labelledby="constat-title">
-    <div class="wrap">
-      <div class="split">
-        <div>
-          <p class="eyebrow">Le constat</p>
-          <h2 id="constat-title">Le prix de l'électricité change toutes les heures. Vos machines ne le voient pas.</h2>
-          <div class="prose" style="margin-top: 28px;">
-            <p>Pour produire du froid ou de la chaleur sous 100 °C, industriels et logisticiens s'appuient sur des groupes froids et des pompes à chaleur. Ces machines démarrent quand le process le demande, <strong>sans regarder le prix de l'heure ni la météo</strong>.</p>
-            <p>L'écart entre les heures chères et les heures bon marché n'a pourtant jamais été aussi large. Chaque jour, une partie du froid et de la chaleur est produite au mauvais moment, et payée au prix fort.</p>
-            <p>Les utilités ne sont pas le cœur de métier d'un site. Personne n'a le temps d'en réoptimiser la marche heure par heure.</p>
-          </div>
-        </div>
-        <div class="facts">
-          <div class="fact">
-            <span class="fact-value num">90<small>€/MWh</small></span>
-            <div class="fact-text">
-              <p>d'<strong>écart moyen en 2025</strong> entre l'heure la plus chère et la moins chère de la journée sur le marché spot français, contre 27 €/MWh en 2019.</p>
-              <a class="source" href="https://analysesetdonnees.rte-france.com/bilan-electrique-2025/prix" rel="noopener" target="_blank">RTE, Bilan électrique 2025</a>
-            </div>
-          </div>
-          <div class="fact">
-            <span class="fact-value num">513<small>h</small></span>
-            <div class="fact-text">
-              <p>de <strong>prix négatifs</strong> en France en 2025, contre 147 heures en 2023.</p>
-              <a class="source" href="https://analysesetdonnees.rte-france.com/bilan-electrique-2025/prix" rel="noopener" target="_blank">RTE, Bilans électriques 2023 et 2025</a>
-            </div>
-          </div>
-          <div class="fact">
-            <span class="fact-value num">20<small>%</small></span>
-            <div class="fact-text">
-              <p>de l'<strong>électricité consommée dans le monde</strong> sert à produire du froid.</p>
-              <a class="source" href="https://iifiir.org/en/news/international-institute-of-refrigeration-iir-releases-new-technical-brief-the-role-of-refrigeration-in-the-global-economy-3rd-edition" rel="noopener" target="_blank">Institut international du froid, 2025</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <figure class="quote">
-        <span class="quote-mark" aria-hidden="true">«</span>
-        <blockquote>
-          <p>La gestion du froid est assez archaïque, les compresseurs suivent la consigne, et c'est tout. On sait qu'on pourrait optimiser, mais les directeurs de site ont la tête dans l'opérationnel. Pendant une vague de chaleur, les compresseurs tournent à fond et tombent tous en rade au même moment.</p>
-        </blockquote>
-        <figcaption>Ancien directeur de site d'entreposage frigorifique, 30 ans chez un leader européen du froid</figcaption>
-      </figure>
-
-      <div class="stores">
-        <div>
-          <h3>Le stockage est déjà sur votre site.</h3>
-          <p>Pour décaler la production, il faut stocker. Dans la plupart des sites, ce stockage existe déjà et ne demande aucun investissement.</p>
-        </div>
-        <div class="store-list">
-          <div class="store">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="8" y="22" width="14" height="12" rx="1.5"/><rect x="26" y="22" width="14" height="12" rx="1.5"/><rect x="17" y="8" width="14" height="14" rx="1.5"/><path d="M5 34h38M8 39h32M10 34v5M24 34v5M38 34v5"/><path d="M24 11.5v7M21 13.2l6 3.6M27 13.2l-6 3.6" stroke="#3b7bf0"/></svg>
-            <h4>Marchandises et chambres froides</h4>
-            <p>Les produits stockés gardent le froid pendant des heures. Un léger pré-refroidissement, dans la plage autorisée, permet de passer les heures chères.</p>
-          </div>
-          <div class="store">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="5" y="15" width="38" height="21" rx="5"/><path d="M5 26c4.2-3 8.5 3 12.7 0s8.5 3 12.6 0 8.5 3 12.7 0" stroke="#3b7bf0"/><path d="M12 36v4M36 36v4M20 15v-5h8v5"/></svg>
-            <h4>Bâches d'eau glacée</h4>
-            <p>Courantes en agroalimentaire, elles se chargent en froid quand l'électricité est bon marché et le restituent au process.</p>
-          </div>
-          <div class="store">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="15" y="5" width="18" height="36" rx="9"/><rect x="19" y="12" width="10" height="7" rx="2" fill="#ff6b35" stroke="none"/><rect x="19" y="20.5" width="10" height="6" rx="2" fill="#f5a524" stroke="none"/><rect x="19" y="28" width="10" height="7" rx="2" fill="#3b7bf0" stroke="none"/><path d="M18 41v3M30 41v3"/></svg>
-            <h4>Ballons et cuves d'eau chaude</h4>
-            <p>Côté chaleur, les ballons tampons, les cuves et même un digesteur de méthanisation jouent le même rôle de réservoir.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOLUTION -->
-  <section class="band band-night section" id="solution" aria-labelledby="solution-title">
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="band band-night section is-joined" id="solution" aria-labelledby="solution-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">La solution</p>
+        <p class="eyebrow">Comment ça marche</p>
         <h2 id="solution-title">Mayco décale la production de froid et de chaleur vers les heures où elle coûte le moins.</h2>
         <p class="lead">Notre logiciel arbitre en continu trois leviers, puis transmet ses consignes à vos machines existantes. Votre site devient une batterie thermique.</p>
+      </div>
+
+      <div class="daybar" data-daybar aria-hidden="true">
+        <div class="daybar-clock"><span>Journée type</span><b class="num" data-day-time>13:00</b></div>
+        <div class="daybar-ribbon">
+          <div class="daybar-cells"><i class="is-amber"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-heat"></i><i class="is-heat"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-cold"></i><i class="is-cold"></i><i class="is-cold"></i><i class="is-cold"></i><i class="is-cold"></i><i class="is-amber"></i><i class="is-amber"></i><i class="is-heat"></i><i class="is-heat"></i><i class="is-heat"></i><i class="is-heat"></i><i class="is-amber"></i><i class="is-amber"></i></div>
+          <span class="daybar-head" data-day-head style="left: 56.25%;"></span>
+          <div class="daybar-hours"><span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span></div>
+        </div>
+        <div class="daybar-state"><span class="daybar-dot is-cold" data-day-dot></span><span data-day-state>Prix bas · on produit plus et on stocke le froid</span></div>
       </div>
 
       <div class="flow">
@@ -233,7 +170,7 @@
           <div class="lever">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13c5 0 7 17 13 17S23 8 28 8s5 8 9 8"/><circle cx="16" cy="30" r="3.2" fill="#3b7bf0" stroke="none"/><circle cx="28" cy="8" r="3.2" fill="#ff6b35" stroke="none"/></svg>
             <div>
-              <h3>Prix de l'électricité</h3>
+              <h3>Prix de l'électricité <span class="live-pill is-cold" data-day-price>18 €/MWh</span></h3>
               <p>90 €/MWh d'écart moyen dans la journée en 2025. On produit quand l'électricité est la moins chère.</p>
             </div>
           </div>
@@ -253,11 +190,11 @@
           </div>
         </div>
 
-        <div class="link" aria-hidden="true"></div>
+        <div class="link" data-link="1" aria-hidden="true"></div>
 
         <div class="node is-mayco">
           <div class="node-box">
-            <svg viewBox="0 0 64 64" fill="none" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="52" height="52" rx="15" stroke="currentColor" stroke-width="2.4"/><path d="M22 23v18" stroke="#3b7bf0" stroke-width="6"/><path d="M32 18v28" stroke="#f5a524" stroke-width="6"/><path d="M42 23v18" stroke="#ff6b35" stroke-width="6"/></svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="52" height="52" rx="15" stroke="currentColor" stroke-width="2.4"/><path d="M22 23v18" stroke="#3b7bf0" stroke-width="6" data-tier="cold"/><path d="M32 18v28" stroke="#f5a524" stroke-width="6" data-tier="amber"/><path d="M42 23v18" stroke="#ff6b35" stroke-width="6" data-tier="heat"/></svg>
           </div>
           <div class="node-text">
             <h3>Pilotage Mayco</h3>
@@ -265,11 +202,11 @@
           </div>
         </div>
 
-        <div class="link" aria-hidden="true"></div>
+        <div class="link" data-link="2" aria-hidden="true"></div>
 
         <div class="node">
           <div class="node-box">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="13" width="54" height="34" rx="5"/><circle cx="23" cy="30" r="10.5"/><circle cx="23" cy="30" r="1.8" fill="currentColor" stroke="none"/><path d="M23 28.2c-1.2-3.6.6-6.8 4-7.4M24.6 31c3.6.9 5.4 4 4 7.2M21.4 31c-2.6 2.8-6.3 3-8.4.5" stroke-width="1.8"/><path d="M41 22h11M41 28h11M41 34h11M41 40h11"/><path d="M13 47v5M51 47v5"/></svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="13" width="54" height="34" rx="5"/><circle cx="23" cy="30" r="10.5"/><circle cx="23" cy="30" r="1.8" fill="currentColor" stroke="none"/><g data-rotor><path d="M23 28.2c-1.2-3.6.6-6.8 4-7.4M24.6 31c3.6.9 5.4 4 4 7.2M21.4 31c-2.6 2.8-6.3 3-8.4.5" stroke-width="1.8"/></g><path d="M41 22h11M41 28h11M41 34h11M41 40h11"/><path d="M13 47v5M51 47v5"/></svg>
           </div>
           <div class="node-text">
             <h3>Groupe froid ou PAC</h3>
@@ -277,11 +214,11 @@
           </div>
         </div>
 
-        <div class="link is-cold" aria-hidden="true"></div>
+        <div class="link is-cold" data-link="3" aria-hidden="true"></div>
 
         <div class="node">
           <div class="node-box">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 54V26l26-14 26 14v28"/><path d="M3 54h58"/><rect x="18" y="34" width="28" height="20" fill="rgba(59,123,240,.28)" stroke="none"/><path d="M18 54V34h28v20M18 40.5h28M18 47h28"/><path d="M32 18.5v7M29 20.2l6 3.6M35 20.2l-6 3.6" stroke="#6f9ff8" stroke-width="1.8"/></svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 54V26l26-14 26 14v28"/><path d="M3 54h58"/><rect x="18" y="41.4" width="28" height="12.6" fill="rgba(59,123,240,.42)" stroke="none" data-fill/><path d="M18 54V34h28v20M18 40.5h28M18 47h28"/><path d="M32 18.5v7M29 20.2l6 3.6M35 20.2l-6 3.6" stroke="#6f9ff8" stroke-width="1.8"/></svg>
           </div>
           <div class="node-text">
             <h3>Votre site sert de stockage</h3>
@@ -291,56 +228,29 @@
       </div>
 
       <p class="flow-foot">Le process reçoit le même froid et la même chaleur. <span>Vous achetez moins d'électricité, moins cher,</span> et votre flexibilité peut être rémunérée.</p>
+      <div class="eco">
+        <span class="mono">Pour</span>
+        <ul>
+          <li>Entrepôts frigorifiques</li>
+          <li>Agroalimentaire</li>
+          <li>Méthanisation</li>
+          <li>Blanchisseries</li>
+          <li>Centres aquatiques</li>
+          <li>Exploitants et ESCO</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- MÉTHODE -->
-  <section class="band band-frost section" id="methode" aria-labelledby="methode-title">
+  <!-- GARANTIES -->
+  <section class="band band-frost section" id="garanties" aria-labelledby="garanties-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Méthode</p>
-        <h2 id="methode-title">Un jumeau numérique de votre site, piloté en quatre temps.</h2>
-        <p class="lead">À partir de données simples, Mayco modélise le comportement thermique de votre site, puis le pilote en respectant toutes vos contraintes d'exploitation.</p>
+        <p class="eyebrow">Vos garanties</p>
+        <h2 id="garanties-title">Vos règles d’exploitation restent la limite.</h2>
+        <p class="lead">Mayco agit comme une couche de pilotage au-dessus de votre installation, sans la remplacer.</p>
       </div>
-
-      <ol class="phases" style="list-style: none; margin: 0; padding: 0;">
-        <li class="phase">
-          <div class="phase-head"><span class="phase-num">01</span><span class="phase-rule"></span></div>
-          <h3>Modéliser</h3>
-          <p>Nous construisons un jumeau numérique stochastique de votre système thermique : consommation, production, pertes et aléas extérieurs.</p>
-          <div class="chips"><span class="chip">historique de conso</span><span class="chip">fiches machines</span><span class="chip">plages de consigne</span></div>
-        </li>
-        <li class="phase">
-          <div class="phase-head"><span class="phase-num">02</span><span class="phase-rule"></span></div>
-          <h3>Observer</h3>
-          <p>Nous collectons en direct les prévisions de prix, de météo et d'activité du site, et l'état réel des machines grâce aux capteurs.</p>
-          <div class="chips"><span class="chip">prix spot J+1</span><span class="chip">météo</span><span class="chip">planning</span><span class="chip">capteurs</span></div>
-        </li>
-        <li class="phase">
-          <div class="phase-head"><span class="phase-num">03</span><span class="phase-rule"></span></div>
-          <h3>Optimiser</h3>
-          <p>Notre algorithme d'optimisation sous contraintes calcule le plan de marche le plus économique qui respecte toutes vos limites.</p>
-          <div class="chips"><span class="chip">coût</span><span class="chip">températures</span><span class="chip">limites machines</span></div>
-        </li>
-        <li class="phase">
-          <div class="phase-head"><span class="phase-num">04</span><span class="phase-rule"></span></div>
-          <h3>Exécuter</h3>
-          <p>Notre boîtier, installé sur site et supervisé à distance, transmet les consignes à vos automates existants et remonte les mesures.</p>
-          <div class="chips"><span class="chip">automates existants</span><span class="chip">journal des consignes</span></div>
-        </li>
-      </ol>
-
-      <p class="loop-line">
-        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 11a10 10 0 0 0-18.2-2.6M5 17a10 10 0 0 0 18.2 2.6" /><path d="M4 3.5v5h5M24 24.5v-5h-5" stroke="#ff6b35"/></svg>
-        <span><strong>La mesure recale le modèle.</strong> L'écart entre ce que le pilotage avait prévu et ce que mesurent les capteurs affine en continu le jumeau numérique de votre site.</span>
-      </p>
-
-      <div class="guards">
-        <div>
-          <h3>Vos règles d'exploitation restent la limite.</h3>
-          <p>Mayco agit comme une couche de pilotage au-dessus de votre installation, sans la remplacer.</p>
-        </div>
-        <ul class="guard-list">
+      <ul class="guard-list is-wide">
           <li>
             <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cold-ink);" aria-hidden="true"><circle cx="11" cy="11" r="9.5"/><path d="M6.8 11.3l2.9 2.9 5.6-6"/></svg>
             <span><strong>Dans votre plage de température</strong>Le pilotage reste dans les bornes que vous fixez. Températures et consignes sont tracées et horodatées.</span>
@@ -358,149 +268,39 @@
             <span><strong>Votre mainteneur garde la main</strong>La maintenance reste chez votre frigoriste ou votre installateur, avec qui nous travaillons.</span>
           </li>
         </ul>
-      </div>
     </div>
   </section>
 
-  <!-- SECTEURS -->
-  <section class="band band-night section" id="secteurs" aria-labelledby="secteurs-title">
+  <!-- ECONOMIES -->
+  <section class="band band-night section" id="economies" aria-labelledby="economies-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Pour qui</p>
-        <h2 id="secteurs-title">Des sites où le froid et la chaleur pèsent lourd, et où le stockage existe déjà.</h2>
-        <p class="lead">Nous commençons par les sites déjà électrifiés, pilotables sans travaux.</p>
+        <p class="eyebrow">Vos économies</p>
+        <h2 id="economies-title">Mayco gagne quand vous gagnez.</h2>
       </div>
-
-      <div class="spec" role="table" aria-label="Secteurs couverts">
-        <div class="spec-row spec-head" role="row">
-          <span role="columnheader">Site</span>
-          <span role="columnheader">Ce que Mayco pilote</span>
-          <span role="columnheader">Le stockage déjà en place</span>
-          <span role="columnheader">Qui décide</span>
+      <div class="estimator is-first" data-estimator>
+        <div class="est-head">
+          <h3>Combien sur votre site ?</h3>
+          <p>Les curseurs sont réglés sur un entrepôt frigorifique type : 1,5 MWe de froid, 9 GWh d’électricité par an. Ajustez-les à votre site.</p>
         </div>
-        <div class="spec-row" role="row">
-          <div class="spec-sector" role="cell">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 42V20L24 9l19 11v22"/><path d="M3 42h42"/><rect x="14" y="27" width="20" height="15" fill="rgba(59,123,240,.28)" stroke="none"/><path d="M14 42V27h20v15M14 32h20M14 37h20"/></svg>
-            <div>
-              <h3>Entrepôts frigorifiques</h3>
-              <p>Surgelé et frais, sites indépendants ou réseaux multi-sites</p>
-              <span class="tag-entry">Point d'entrée</span>
-            </div>
+        <div class="est-controls">
+          <div class="est-field">
+            <div class="est-label"><label for="est-gwh">Électricité consommée par vos groupes froids ou PAC</label><output for="est-gwh" data-est-out="gwh">9 GWh/an</output></div>
+            <input id="est-gwh" type="range" min="0.5" max="30" step="0.5" value="9" style="--p: 28.8%;">
           </div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Ce que Mayco pilote</span>Centrales et groupes froids</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Le stockage déjà en place</span>L'inertie des marchandises et des chambres froides</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Qui décide</span>Direction technique du groupe, directeur de site</div>
+          <div class="est-field">
+            <div class="est-label"><label for="est-price">Prix moyen de votre électricité</label><output for="est-price" data-est-out="price">130 €/MWh</output></div>
+            <input id="est-price" type="range" min="60" max="220" step="5" value="130" style="--p: 43.75%;">
+          </div>
         </div>
-        <div class="spec-row" role="row">
-          <div class="spec-sector" role="cell">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 42V22l9 5v-5l9 5v-5l9 5V8h8v34Z"/><path d="M2 42h44"/><path d="M10 35h4M19 35h4M28 35h4" stroke="#3b7bf0"/></svg>
-            <div>
-              <h3>Agroalimentaire</h3>
-              <p>Froid de process, eau glacée, eau chaude de process et de lavage</p>
-            </div>
-          </div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Ce que Mayco pilote</span>Groupes froids de process, production d'eau glacée, PAC</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Le stockage déjà en place</span>Bâches d'eau glacée, tanks et cuves tampon</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Qui décide</span>Responsable utilités ou énergie, direction technique</div>
+        <div class="est-result">
+          <span class="est-k">Économies possibles, jusqu’à</span>
+          <b class="est-save num" data-est-out="save">234 k€/an</b>
+          <div class="bill-track" aria-hidden="true"><span class="bill-fill is-mayco" style="width: 80%;"></span><span class="bill-fill is-gain" style="width: 20%;"></span></div>
+          <span class="est-bill">sur une facture d’environ <b class="num" data-est-out="bill">1,17 M€</b> par an</span>
+          <a class="btn btn-primary" href="#contact">Chiffrer sur mes données <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
         </div>
-        <div class="spec-row" role="row">
-          <div class="spec-sector" role="cell">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="12" width="38" height="24" rx="4"/><circle cx="18" cy="24" r="7"/><circle cx="18" cy="24" r="1.6" fill="currentColor" stroke="none"/><path d="M30 18c2 2 2 4 0 6s-2 4 0 6M36 18c2 2 2 4 0 6s-2 4 0 6" stroke="#ff6b35"/><path d="M11 36v4M37 36v4"/></svg>
-            <div>
-              <h3>Sites équipés de pompes à chaleur</h3>
-              <p>Méthanisation, blanchisseries, centres aquatiques, teintureries</p>
-            </div>
-          </div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Ce que Mayco pilote</span>Pompes à chaleur industrielles, chaleur sous 100 °C</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Le stockage déjà en place</span>Ballons tampons, digesteurs, bassins</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Qui décide</span>Dirigeant ou responsable technique</div>
-        </div>
-        <div class="spec-row" role="row">
-          <div class="spec-sector" role="cell">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="22" width="10" height="18" rx="1.5"/><rect x="19" y="12" width="10" height="28" rx="1.5"/><rect x="33" y="18" width="10" height="22" rx="1.5"/><path d="M10 22v-6h9M38 18v-6h-9" stroke="#f5a524"/><path d="M3 40h42"/></svg>
-            <div>
-              <h3>Exploitants et ESCO</h3>
-              <p>Contrats de performance énergétique, réseaux de chaleur</p>
-            </div>
-          </div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Ce que Mayco pilote</span>Les parcs de machines thermiques que vous exploitez</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Le stockage déjà en place</span>Selon les sites : ballons, réseaux, inertie des bâtiments</div>
-          <div class="spec-cell" role="cell"><span class="spec-k">Qui décide</span>Direction technique, puis directeur de contrat</div>
-        </div>
-      </div>
-
-      <div class="partners">
-        <p><strong>Fabricants, installateurs, frigoristes.</strong> Vos clients cherchent à réduire leur facture d'énergie. Proposez-leur des installations pilotées par Mayco, avec vos équipements.</p>
-        <a class="btn btn-ghost" href="#contact">Devenir partenaire</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAS TYPE -->
-  <section class="band band-frost section" id="cas-type" aria-labelledby="cas-title">
-    <div class="wrap">
-      <div class="case">
-        <div>
-          <p class="eyebrow">Cas type</p>
-          <h2 id="cas-title">Un entrepôt frigorifique à +4 °C.</h2>
-          <ol class="case-steps">
-            <li>
-              <span class="step-n">1</span>
-              <div>
-                <h3>Le froid, un coût lourd et mal maîtrisé</h3>
-                <p>L'entrepôt est maintenu à +4 °C toute l'année. Les groupes froids suivent la consigne, quel que soit le prix de l'heure.</p>
-              </div>
-            </li>
-            <li>
-              <span class="step-n">2</span>
-              <div>
-                <h3>Mayco pilote le système thermique</h3>
-                <p>À partir des données du site, Mayco construit son jumeau numérique, puis pilote les groupes froids en jouant sur le <strong>profil d'inertie</strong> de l'entrepôt.</p>
-              </div>
-            </li>
-            <li>
-              <span class="step-n">3</span>
-              <div>
-                <h3>Des économies dès la première année</h3>
-                <p>Pas de machine à acheter ni de chantier : les économies commencent dès la mise en service du pilotage.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-
-        <div class="sheet" aria-label="Fiche du cas type">
-          <div class="sheet-head"><span>Fiche site · cas illustratif</span><span>+4 °C</span></div>
-          <div class="sheet-specs">
-            <div class="sheet-spec"><b>1,5 MWe</b><span>puissance froid électrique</span></div>
-            <div class="sheet-spec"><b>9 GWh</b><span>d'électricité par an</span></div>
-            <div class="sheet-spec"><b>1,2 M€</b><span>de facture par an</span></div>
-          </div>
-          <div class="sheet-bars">
-            <div class="bill">
-              <div class="bill-top"><span>Facture actuelle</span><b>1,2 M€ / an</b></div>
-              <div class="bill-track" aria-hidden="true"><span class="bill-fill" style="width: 100%;"></span></div>
-            </div>
-            <div class="bill">
-              <div class="bill-top"><span>Avec le pilotage Mayco</span><b>≈ 0,96 M€ / an</b></div>
-              <div class="bill-track" aria-hidden="true"><span class="bill-fill is-mayco" style="width: 80%;"></span><span class="bill-fill is-gain" style="width: 20%;"></span></div>
-            </div>
-          </div>
-          <div class="sheet-result">
-            <b class="num">240 k€</b>
-            <span><strong>d'économies par an</strong>, soit −20 % sur la facture de froid, sans investissement matériel.</span>
-          </div>
-          <p class="sheet-note">Cas construit pour donner un ordre de grandeur, il ne décrit pas un client. Hypothèses : électricité à 130 €/MWh, 20 % d'économies. Votre chiffrage se fait sur les données réelles de votre site.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODÈLE -->
-  <section class="band band-night section" id="modele" aria-labelledby="modele-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Modèle</p>
-        <h2 id="modele-title">Mayco gagne quand vous gagnez.</h2>
+        <p class="est-note">Ordre de grandeur indicatif, calculé à 20 % d’économies. Le chiffrage réel dépend de votre site, de vos machines et de votre contrat d’électricité.</p>
       </div>
 
       <div class="pillars">
@@ -519,60 +319,6 @@
           <h3>Le process d'abord</h3>
           <p>Le besoin en froid et en chaleur reste couvert, dans vos plages de consigne. Votre frigoriste garde la maintenance.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IMPACT -->
-  <section class="band band-frost section" id="impact" aria-labelledby="impact-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Impact</p>
-        <h2 id="impact-title">Moins de dépense, un réseau plus stable, une chaîne du froid plus sûre.</h2>
-      </div>
-      <div class="impact">
-        <div class="impact-item">
-          <h3>Compétitivité industrielle</h3>
-          <p>L'énergie pèse sur la compétitivité des sites industriels et logistiques. Chaque euro économisé sur les utilités renforce leur résilience, et les emplois qui vont avec.</p>
-        </div>
-        <div class="impact-item">
-          <h3>Équilibre du réseau</h3>
-          <p>Consommer quand l'électricité renouvelable abonde et réduire sa consommation aux pointes aide à équilibrer le réseau. En 2025, près de 3 TWh de production solaire et éolienne ont été perdus en France faute de débouchés lors des prix négatifs.</p>
-          <a class="source" href="https://assets.rte-france.com/prod/public/2026-03/Bilan-electrique-2025-rapport-complet_0.pdf" rel="noopener" target="_blank">RTE, Bilan électrique 2025</a>
-        </div>
-        <div class="impact-item">
-          <h3>Chaîne du froid</h3>
-          <p>Pré-refroidir avant une vague de chaleur évite de faire tourner tous les compresseurs à fond au même moment, et réduit le risque de panne et de pertes de marchandises.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÉQUIPE -->
-  <section class="band band-night section" id="equipe" aria-labelledby="equipe-title">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">L'équipe</p>
-        <h2 id="equipe-title">L'énergie et l'IA, réunies pour piloter vos machines.</h2>
-        <p class="lead">Mayco Energy associe une expertise des marchés de l'électricité et des systèmes énergétiques à une expertise en intelligence artificielle et en optimisation.</p>
-      </div>
-      <div class="team">
-        <article class="person">
-          <span class="monogram" aria-hidden="true">NS</span>
-          <div>
-            <h3>Nicolas Salem-Sermanet</h3>
-            <p class="role">Cofondateur · CEO</p>
-            <p>Ingénieur CentraleSupélec en efficacité énergétique, issu de la filière entrepreneuriat. Spécialiste des marchés de l'électricité et des systèmes énergétiques, passé par le capital-risque.</p>
-          </div>
-        </article>
-        <article class="person">
-          <span class="monogram" aria-hidden="true">GT</span>
-          <div>
-            <h3>Gustave Triomphe</h3>
-            <p class="role">Cofondateur · CTO</p>
-            <p>Ingénieur de l'École polytechnique spécialisé en IA, data science et deep learning. Passé par le conseil en transition énergétique, il conçoit les modèles et l'algorithme de pilotage de Mayco.</p>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -600,10 +346,6 @@
         <details>
           <summary>Quel rôle garde mon frigoriste ou mon installateur ?</summary>
           <p>Il conserve la maintenance et la responsabilité de vos équipements. Nous travaillons avec lui et n'agissons que par les interfaces prévues par le constructeur.</p>
-        </details>
-        <details>
-          <summary>D'où viennent les économies ?</summary>
-          <p>De leviers combinés : acheter l'électricité aux heures les moins chères, faire tourner les machines quand leur rendement est le meilleur, limiter la puissance appelée aux heures de pointe et valoriser la flexibilité de votre site auprès du réseau.</p>
         </details>
         <details>
           <summary>Mon contrat d'électricité n'est pas indexé sur le prix spot. Le pilotage est-il utile ?</summary>
@@ -635,6 +377,11 @@
             <a href="mailto:contact@maycoenergy.com" data-mail>contact@maycoenergy.com</a>
             <button class="copy-btn" type="button" data-copy="contact@maycoenergy.com"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4.5" y="4.5" width="8" height="8" rx="1.5"/><path d="M9.5 4.5V3a1.5 1.5 0 0 0-1.5-1.5H3A1.5 1.5 0 0 0 1.5 3v5A1.5 1.5 0 0 0 3 9.5h1.5"/></svg><span>Copier</span></button>
           </div>
+        </div>
+        <div class="founders">
+          <span class="mono">Vous échangez directement avec les fondateurs</span>
+          <div class="founder"><span class="monogram" aria-hidden="true">NS</span><span><strong>Nicolas Salem-Sermanet</strong>CEO · ingénieur CentraleSupélec</span></div>
+          <div class="founder"><span class="monogram" aria-hidden="true">GT</span><span><strong>Gustave Triomphe</strong>CTO · ingénieur de l’École polytechnique</span></div>
         </div>
       </div>
 
@@ -699,24 +446,21 @@
         <p>Pilotage énergétique des groupes froids et des pompes à chaleur déjà installés chez les industriels.</p>
       </div>
       <div class="footer-col">
-        <span class="mono">Solution</span>
-        <a href="#solution">La solution</a>
-        <a href="#methode">Méthode</a>
-        <a href="#secteurs">Secteurs</a>
-        <a href="#cas-type">Cas type</a>
+        <span class="mono">Le site</span>
+        <a href="#solution">Comment ça marche</a>
+        <a href="#garanties">Garanties</a>
+        <a href="#economies">Économies</a>
+        <a href="#faq">Questions fréquentes</a>
       </div>
       <div class="footer-col">
-        <span class="mono">Entreprise</span>
-        <a href="#modele">Modèle</a>
-        <a href="#equipe">Équipe</a>
-        <a href="#faq">Questions fréquentes</a>
+        <span class="mono">Informations</span>
         <a href="mentions-legales.html">Mentions légales</a>
+        <a href="en/" hreflang="en" lang="en">English version</a>
       </div>
       <div class="footer-col">
         <span class="mono">Contact</span>
         <a href="mailto:contact@maycoenergy.com">contact@maycoenergy.com</a>
         <a href="#contact">Demander un chiffrage</a>
-        <a href="en/" hreflang="en" lang="en">English version</a>
       </div>
     </div>
     <div class="footer-base">

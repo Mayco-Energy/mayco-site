@@ -23,7 +23,15 @@
       email: "Adresse e-mail invalide.",
       status: "Votre messagerie s'ouvre avec la demande pré-remplie : il ne reste qu'à l'envoyer. Si rien ne s'ouvre, écrivez-nous directement à contact@maycoenergy.com.",
       subject: "Demande de chiffrage",
-      labels: { name: "Nom", email: "E-mail", company: "Société", site: "Type de site", size: "Puissance ou facture", message: "Message" }
+      labels: { name: "Nom", email: "E-mail", company: "Société", site: "Type de site", size: "Puissance ou facture", message: "Message" },
+      hourRange: function (i) { return i + "h – " + (i + 1) + "h"; },
+      clock: function (h, m) { return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m; },
+      tierWord: { cold: "Prix bas", amber: "Prix moyen", heat: "Prix élevé" },
+      action: { charge: "on produit plus et on stocke le froid", draw: "on puise dans le stockage", follow: "on suit le besoin" },
+      mwh: "/MWh",
+      bigMoney: function (m, k) { return m ? m + " M€" : k + " k€"; },
+      perYear: "/an",
+      gwh: " GWh/an"
     },
     en: {
       price: "SPOT PRICE · €/MWh",
@@ -42,12 +50,27 @@
       email: "Invalid email address.",
       status: "Your email app opens with the request pre-filled: just hit send. If nothing opens, write to us directly at contact@maycoenergy.com.",
       subject: "Savings estimate request",
-      labels: { name: "Name", email: "Email", company: "Company", site: "Site type", size: "Load or bill", message: "Message" }
+      labels: { name: "Name", email: "Email", company: "Company", site: "Site type", size: "Load or bill", message: "Message" },
+      hourRange: function (i) { return (i < 10 ? "0" : "") + i + ":00 – " + (i + 1 < 10 ? "0" : "") + (i + 1) + ":00"; },
+      clock: function (h, m) { return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m; },
+      tierWord: { cold: "Low price", amber: "Mid price", heat: "High price" },
+      action: { charge: "producing more and storing cold", draw: "drawing on storage", follow: "following demand" },
+      mwh: "/MWh",
+      bigMoney: function (m, k) { return m ? "€" + m + "M" : "€" + k + "k"; },
+      perYear: "/yr",
+      gwh: " GWh/yr"
     }
   }[lang === "en" ? "en" : "fr"];
 
   var nf0 = new Intl.NumberFormat(lang === "en" ? "en-GB" : "fr-FR", { maximumFractionDigits: 0 });
   var nf1 = new Intl.NumberFormat(lang === "en" ? "en-GB" : "fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  var nfAuto = new Intl.NumberFormat(lang === "en" ? "en-GB" : "fr-FR", { maximumFractionDigits: 2 });
+
+  function bigMoney(v) {
+    if (v >= 1e6) return T.bigMoney(nfAuto.format(Math.round(v / 1e4) / 100), null);
+    return T.bigMoney(null, nf0.format(Math.round(v / 1e3)));
+  }
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
 
   /* ---------- En-tête : ombre au défilement + menu mobile ---------- */
 
@@ -141,6 +164,7 @@
 
   function initChart(root) {
     var plot = root.querySelector("[data-plot]");
+    var tip = plot.querySelector("[data-tip]");
     var buttons = root.querySelectorAll("[data-mode]");
     var out = {
       cost: root.querySelector("[data-out='cost']"),
@@ -151,7 +175,7 @@
       tempD: root.querySelector("[data-out='temp-delta']")
     };
     var base = stats(DAY.fixed, DAY.tFixed);
-    var state = { mode: "mayco", k: 1 }; // k : 0 = consigne fixe, 1 = Mayco
+    var state = { mode: "mayco", k: 1, hour: null }; // k : 0 = consigne fixe, 1 = Mayco
     var geo = null;
     var raf = null;
 
@@ -175,8 +199,10 @@
       var y0 = m.t, y1 = y0 + hp + gap, y2 = y1 + hb + gap;
       var bw = iw / 24;
 
-      plot.textContent = "";
-      var svg = el("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, role: "presentation", focusable: "false" }, plot);
+      var old = plot.querySelector("svg");
+      if (old) plot.removeChild(old);
+      var svg = el("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "aria-hidden": "true", focusable: "false" });
+      plot.insertBefore(svg, tip);
 
       var defs = el("defs", {}, svg);
       var grad = el("linearGradient", { id: "gPrice", x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
@@ -243,10 +269,68 @@
       }
       var tGhost = el("path", { class: "ch-temp-ghost" }, svg);
       var tLine = el("path", { class: "ch-temp" }, svg);
+      var cursor = el("line", { x1: 0, x2: 0, y1: y0 - 4, y2: y2 + ht + 2, class: "ch-cursor", opacity: 0 }, svg);
 
-      geo = { bars: bars, ghosts: ghosts, tGhost: tGhost, tLine: tLine, x: x, bw: bw, yPow: yPow, yTemp: yTemp, base: y1 + hb };
+      geo = { svg: svg, bars: bars, ghosts: ghosts, tGhost: tGhost, tLine: tLine, cursor: cursor, x: x, bw: bw, ml: m.l, iw: iw, yPow: yPow, yTemp: yTemp, base: y1 + hb };
       paint();
     }
+
+    // Lecture heure par heure : survol, toucher ou flèches du clavier
+    function updateTip(load, temp) {
+      var i = state.hour;
+      if (i === null) {
+        geo.cursor.setAttribute("opacity", "0");
+        tip.hidden = true;
+        return;
+      }
+      var cx = geo.x(i) + geo.bw / 2;
+      geo.cursor.setAttribute("x1", cx.toFixed(1));
+      geo.cursor.setAttribute("x2", cx.toFixed(1));
+      geo.cursor.setAttribute("opacity", "0.85");
+      var p = DAY.price[i];
+      var rows = [
+        ["tip-h", T.hourRange(i)],
+        ["tip-p is-" + tier(p), T.money(nf0.format(p)) + T.mwh],
+        ["", nf0.format(Math.round(load[i] / 10) * 10) + " kW · " + fmtTemp(Math.round(temp[i] * 10) / 10) + " °C"]
+      ];
+      tip.textContent = "";
+      rows.forEach(function (r) {
+        var s = document.createElement("span");
+        if (r[0]) s.className = r[0];
+        s.textContent = r[1];
+        tip.appendChild(s);
+      });
+      var offset = geo.svg.getBoundingClientRect().left - plot.getBoundingClientRect().left;
+      tip.style.left = clamp(offset + cx, 78, plot.clientWidth - 78) + "px";
+      tip.hidden = false;
+    }
+
+    function hourFromX(clientX) {
+      if (!geo) return null;
+      var x = clientX - geo.svg.getBoundingClientRect().left - geo.ml;
+      if (x < 0 || x > geo.iw) return null;
+      return clamp(Math.floor(x / geo.bw), 0, 23);
+    }
+
+    function setHour(i) {
+      if (i === state.hour) return;
+      state.hour = i;
+      paint();
+    }
+
+    plot.addEventListener("pointermove", function (e) { setHour(hourFromX(e.clientX)); });
+    plot.addEventListener("pointerdown", function (e) { setHour(hourFromX(e.clientX)); });
+    plot.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") setHour(null); });
+    plot.addEventListener("blur", function () { setHour(null); });
+    plot.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        var step = e.key === "ArrowRight" ? 1 : -1;
+        setHour(state.hour === null ? 12 : clamp(state.hour + step, 0, 23));
+      } else if (e.key === "Escape") {
+        setHour(null);
+      }
+    });
 
     function tempPath(arr) {
       return "M" + arr.map(function (v, i) {
@@ -267,9 +351,11 @@
         var yg = geo.yPow(ghost[i]);
         geo.ghosts[i].setAttribute("y", yg.toFixed(1));
         geo.ghosts[i].setAttribute("height", Math.max(0, geo.base - yg).toFixed(1));
+        geo.bars[i].style.opacity = state.hour === null || state.hour === i ? "" : "0.35";
       }
       geo.tLine.setAttribute("d", tempPath(temp));
       geo.tGhost.setAttribute("d", tempPath(ghostT));
+      updateTip(load, temp);
     }
 
     function readouts() {
@@ -347,6 +433,223 @@
       if (Math.abs(plot.clientWidth - lastW) > 2) { lastW = plot.clientWidth; build(); }
     }) : null;
     if (ro) ro.observe(plot); else window.addEventListener("resize", build);
+  }
+
+  /* ---------- Champ thermique du hero ----------
+     Une grille de points colorés comme une image thermique : chaud en haut,
+     froid en bas (la stratification d'un ballon), et le curseur réchauffe. */
+
+  var field = document.querySelector("[data-field]");
+  if (field && hero && field.getContext) initField(field, hero);
+
+  function initField(canvas, host) {
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    var W = 0, H = 0, gap = 24;
+    var mouse = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4, heat: 0, target: 0 };
+    var running = false, rafId = null, lastT = 0;
+    var COLS = [[59, 123, 240], [245, 165, 36], [255, 107, 53]];
+
+    function smooth(a, b, v) {
+      var t = clamp((v - a) / (b - a), 0, 1);
+      return t * t * (3 - 2 * t);
+    }
+
+    function resize() {
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = host.clientWidth;
+      H = host.clientHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      gap = W < 700 ? 20 : 24;
+    }
+
+    function draw(time) {
+      var t = time * 0.00016;
+      mouse.x += (mouse.tx - mouse.x) * 0.14;
+      mouse.y += (mouse.ty - mouse.y) * 0.14;
+      mouse.heat += (mouse.target - mouse.heat) * 0.06;
+      ctx.clearRect(0, 0, W, H);
+      var narrow = W < 700;
+      for (var y = gap * 0.6; y < H; y += gap) {
+        var vy = y / H;
+        var my = 1 - smooth(narrow ? 0.1 : 0.26, narrow ? 0.28 : 0.5, vy);
+        for (var x = gap * 0.6; x < W; x += gap) {
+          var dx = x - mouse.x, dy = y - mouse.y;
+          var h = mouse.heat * Math.exp(-(dx * dx + dy * dy) / 16000);
+          var m = Math.max(my * (narrow ? 0.45 : smooth(0.38, 0.82, x / W)), h * 0.85);
+          if (m < 0.03) continue;
+          var f = 0.5 + 0.2 * Math.sin(x * 0.0042 + t * 1.3) * Math.cos(y * 0.0065 - t) +
+            0.16 * Math.sin((x - y) * 0.0031 + t * 0.7) + (0.35 - vy) * 0.5 + h * 0.55;
+          f = clamp(f, 0, 1);
+          var a = f < 0.5 ? COLS[0] : COLS[1];
+          var b = f < 0.5 ? COLS[1] : COLS[2];
+          var k = f < 0.5 ? f / 0.5 : (f - 0.5) / 0.5;
+          ctx.fillStyle = "rgba(" + ((a[0] + (b[0] - a[0]) * k) | 0) + "," + ((a[1] + (b[1] - a[1]) * k) | 0) + "," +
+            ((a[2] + (b[2] - a[2]) * k) | 0) + "," + (0.05 + 0.32 * m).toFixed(3) + ")";
+          ctx.beginPath();
+          ctx.arc(x, y, 1.1 + 1.3 * Math.min(1, h + Math.abs(f - 0.5) * 0.6), 0, 6.2832);
+          ctx.fill();
+        }
+      }
+    }
+
+    function loop(ts) {
+      if (!running) return;
+      if (ts - lastT > 32) { lastT = ts; draw(ts); }
+      rafId = requestAnimationFrame(loop);
+    }
+    function start() {
+      if (running || reduceMotion || document.hidden) return;
+      running = true;
+      rafId = requestAnimationFrame(loop);
+    }
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    resize();
+    draw(4000);
+    window.addEventListener("resize", function () { resize(); draw(performance.now()); });
+    if (reduceMotion) return;
+
+    host.addEventListener("pointermove", function (e) {
+      var r = host.getBoundingClientRect();
+      mouse.tx = e.clientX - r.left;
+      mouse.ty = e.clientY - r.top;
+      if (mouse.x < -1000) { mouse.x = mouse.tx; mouse.y = mouse.ty; }
+      mouse.target = 1;
+    }, { passive: true });
+    host.addEventListener("pointerleave", function () { mouse.target = 0; });
+
+    var onScreen = true;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) {
+        onScreen = e[0].isIntersecting;
+        if (onScreen) start(); else stop();
+      }).observe(host);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else if (onScreen) start();
+    });
+    start();
+  }
+
+  /* ---------- Solution : la journée type défile ----------
+     Mêmes données que le graphique du hero. Une journée en 20 secondes :
+     prix de l'heure, décision de pilotage, ventilateur du groupe froid,
+     niveau de froid stocké dans l'entrepôt. */
+
+  var daybar = document.querySelector("[data-daybar]");
+  if (daybar) initDay(daybar.closest("section"));
+
+  function initDay(root) {
+    var el$ = function (s) { return root.querySelector(s); };
+    var timeEl = el$("[data-day-time]"), head = el$("[data-day-head]");
+    var stateEl = el$("[data-day-state]"), dot = el$("[data-day-dot]");
+    var pill = el$("[data-day-price]"), rotor = el$("[data-rotor]"), fill = el$("[data-fill]");
+    var tiers = root.querySelectorAll("[data-tier]");
+    var links = root.querySelectorAll("[data-link]");
+    var PERIOD = 20000;
+    var hour = 13, angle = 0, last = null, running = false, rafId = null;
+    var shown = { i: -1, act: "" };
+
+    function render(h, dt) {
+      var i = Math.floor(h) % 24, j = (i + 1) % 24, f = h - Math.floor(h);
+      if (timeEl) timeEl.textContent = T.clock(i, Math.floor(f * 4) * 15);
+      if (head) head.style.left = (h / 24 * 100).toFixed(2) + "%";
+
+      var load = DAY.mayco[i] + (DAY.mayco[j] - DAY.mayco[i]) * f;
+      angle = (angle + dt * 0.42 * load / DAY.pMax) % 360;
+      if (rotor) rotor.setAttribute("transform", "rotate(" + angle.toFixed(1) + " 23 30)");
+
+      var temp = DAY.tMayco[i] + (DAY.tMayco[j] - DAY.tMayco[i]) * f;
+      var level = clamp((DAY.band[1] - temp) / (DAY.band[1] - DAY.band[0]), 0.08, 1);
+      if (fill) {
+        fill.setAttribute("height", (20 * level).toFixed(2));
+        fill.setAttribute("y", (54 - 20 * level).toFixed(2));
+      }
+
+      if (i === shown.i) return;
+      shown.i = i;
+      var p = DAY.price[i], tr = tier(p);
+      var diff = DAY.mayco[i] - DAY.fixed[i];
+      var act = diff > 150 ? "charge" : (diff < -150 ? "draw" : "follow");
+      if (stateEl) stateEl.textContent = T.tierWord[tr] + " · " + T.action[act];
+      if (dot) dot.className = "daybar-dot is-" + tr;
+      if (pill) {
+        pill.textContent = T.money(nf0.format(p)) + T.mwh;
+        pill.className = "live-pill is-" + tr;
+      }
+      tiers.forEach(function (n) { n.style.opacity = n.getAttribute("data-tier") === tr ? "1" : "0.3"; });
+      if (links[2]) {
+        links[2].classList.toggle("is-fast", act === "charge");
+        links[2].classList.toggle("is-slow", act === "draw");
+      }
+      if (links[1]) links[1].classList.toggle("is-slow", act === "draw");
+    }
+
+    function loop(ts) {
+      if (!running) return;
+      var dt = last === null ? 16 : Math.min(64, ts - last);
+      last = ts;
+      hour = (hour + dt / PERIOD * 24) % 24;
+      render(hour, dt);
+      rafId = requestAnimationFrame(loop);
+    }
+    function start() {
+      if (running || reduceMotion || document.hidden) return;
+      running = true;
+      last = null;
+      rafId = requestAnimationFrame(loop);
+    }
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    render(hour, 0);
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+    var onScreen = false;
+    new IntersectionObserver(function (e) {
+      onScreen = e[0].isIntersecting;
+      if (onScreen) start(); else stop();
+    }, { threshold: 0.15 }).observe(root);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else if (onScreen) start();
+    });
+  }
+
+  /* ---------- Économies : simulateur ---------- */
+
+  var est = document.querySelector("[data-estimator]");
+  if (est) initEstimator(est);
+
+  function initEstimator(root) {
+    var gwh = root.querySelector("#est-gwh"), price = root.querySelector("#est-price");
+    var out = function (k) { return root.querySelector("[data-est-out='" + k + "']"); };
+    var oG = out("gwh"), oP = out("price"), oS = out("save"), oB = out("bill");
+    if (!gwh || !price) return;
+
+    function fill(input) {
+      var min = +input.min, max = +input.max;
+      input.style.setProperty("--p", ((+input.value - min) / (max - min) * 100).toFixed(2) + "%");
+    }
+    function update() {
+      var g = +gwh.value, p = +price.value;
+      var bill = g * 1000 * p;
+      oG.textContent = nfAuto.format(g) + T.gwh;
+      oP.textContent = T.money(nf0.format(p)) + T.mwh;
+      oS.textContent = bigMoney(bill * 0.2) + T.perYear;
+      oB.textContent = bigMoney(bill);
+      fill(gwh);
+      fill(price);
+    }
+    gwh.addEventListener("input", update);
+    price.addEventListener("input", update);
+    update();
   }
 
   /* ---------- Copier l'adresse ---------- */
