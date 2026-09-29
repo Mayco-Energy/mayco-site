@@ -60,6 +60,7 @@
       <a href="#onboarding">Getting started</a>
       <a href="#savings">Savings</a>
       <a href="#faq">FAQ</a>
+      <a href="#team">Team</a>
       <a class="btn btn-primary nav-cta" href="#contact">Estimate my savings</a>
     </nav>
     <div class="header-tools">
@@ -277,35 +278,79 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Getting started</p>
-        <h2 id="onboarding-title">How it starts, in practice.</h2>
-        <p class="lead">Once your savings are costed on your data, here is what happens on your site. Control only acts on your machines after an observation period.</p>
+        <h2 id="onboarding-title">From your documents to live control.</h2>
+        <p class="lead">It all starts with the data you already have. The gateway is only installed once your savings are costed, and control only acts on your machines after an observation period.</p>
       </div>
-      <ol class="onboard" data-onboard>
-        <li class="ob-step">
-          <div class="ob-head"><span class="ob-num">01</span><span class="ob-mode">Set-up</span></div>
-          <h3>Connection</h3>
-          <p>With your refrigeration contractor, we connect a communication gateway to your controllers or supervision system. We check that every setpoint is applied, and the operating ranges are approved in writing with them.</p>
-          <p class="ob-you"><span>Your part</span>Site access and your contractor’s agreement.</p>
-        </li>
-        <li class="ob-step">
-          <div class="ob-head"><span class="ob-num">02</span><span class="ob-mode is-watch">Mayco observes</span></div>
-          <h3>Observation</h3>
-          <p>Control first runs without acting. The digital twin learns how your site really behaves, its inertia and how machine efficiency varies with the weather, and together we set the baseline used to measure savings.</p>
-          <p class="ob-you"><span>Your part</span>Approve the baseline and your temperature bands.</p>
-        </li>
-        <li class="ob-step">
-          <div class="ob-head"><span class="ob-num">03</span><span class="ob-mode is-live">Mayco controls</span></div>
-          <h3>Control</h3>
-          <p>Control takes over gradually, always within your bands. Your teams are trained on fallback modes and can take back control at any time.</p>
-          <p class="ob-you"><span>Your part</span>Training for your operations team.</p>
-        </li>
-        <li class="ob-step">
-          <div class="ob-head"><span class="ob-num">04</span><span class="ob-mode">Ongoing</span></div>
-          <h3>Follow-up</h3>
-          <p>Every month, a report: savings measured against the baseline, logged temperatures, time-stamped setpoints. A full review after twelve months, covering a winter and a summer.</p>
-          <p class="ob-you"><span>Your part</span>A regular check-in with your technical manager.</p>
-        </li>
-      </ol>
+      <div class="journey" data-journey>
+        <div class="jr-visual band-night">
+          <div class="jr-inputs">
+            <span class="jr-inputs-k">Continuous</span>
+            <ul aria-label="Data taken into account continuously"><li>Spot price</li><li>Flexibility</li><li>Weather</li><li>Stock</li><li>Activity</li></ul>
+          </div>
+          <div class="jr-stage">
+            <img src="../assets/img/jumeau-numerique-1350.webp" srcset="../assets/img/jumeau-numerique-700.webp 700w, ../assets/img/jumeau-numerique-1350.webp 1350w" sizes="(max-width: 980px) calc(100vw - 32px), 640px" width="1350" height="800" loading="lazy" decoding="async" alt="Illustration of an industrial site: on the left the physical site, with its chillers, cold room, storage tanks and communication gateway; on the right, its digital twin.">
+            <span class="jr-spot" aria-hidden="true"></span>
+            <span class="jr-pin" data-pin="1" style="--x: 37%; --y: 21%;" aria-hidden="true"><i></i><b>Your machines and their history</b></span>
+            <span class="jr-pin" data-pin="2" style="--x: 66%; --y: 68%;" aria-hidden="true"><i></i><b>Digital twin</b></span>
+            <span class="jr-pin is-left" data-pin="3" style="--x: 19%; --y: 41%;" aria-hidden="true"><i></i><b>Communication gateway</b></span>
+            <span class="jr-pin" data-pin="4" style="--x: 48.5%; --y: 26%;" aria-hidden="true"><i></i><b>Real measurements</b></span>
+            <span class="jr-pin" data-pin="5" style="--x: 27%; --y: 35%;" aria-hidden="true"><i></i><b>Setpoints to the machines</b></span>
+            <span class="jr-pin" data-pin="6" style="--x: 40%; --y: 32%;" aria-hidden="true"><i></i><b>Monthly report</b></span>
+            <span class="jr-tag is-site" aria-hidden="true">Physical site</span>
+            <span class="jr-tag is-twin" aria-hidden="true">Digital twin</span>
+          </div>
+        </div>
+        <div class="jr-list">
+          <p class="jr-phase">Before signing</p>
+          <ol class="jr-steps">
+            <li class="jr-step" data-step="1">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-1"><span class="jr-num">01</span><span class="jr-title">Your data</span><span class="jr-mode">Remote</span></button></h3>
+              <div class="jr-body" id="jr-1">
+                <p>You send us what you already have: electricity bills, supervision history, machine datasheets. Nothing to install at this stage.</p>
+                <p class="jr-you"><span>Your part</span>Gather these documents.</p>
+              </div>
+            </li>
+            <li class="jr-step" data-step="2">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-2"><span class="jr-num">02</span><span class="jr-title">Digital twin</span><span class="jr-mode">Remote</span></button></h3>
+              <div class="jr-body" id="jr-2">
+                <p>Our AI turns them into a digital twin of your thermal system: production, storage, losses, efficiency depending on the weather. It replays your history with Mayco control to cost your savings: this is the feasibility study.</p>
+                <p class="jr-you"><span>Your part</span>Approve your temperature bands and the baseline used to measure savings.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="jr-phase is-signed">After signing</p>
+          <ol class="jr-steps" start="3">
+            <li class="jr-step" data-step="3">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-3"><span class="jr-num">03</span><span class="jr-title">Gateway</span><span class="jr-mode">On site</span></button></h3>
+              <div class="jr-body" id="jr-3">
+                <p>With your refrigeration contractor, we connect a communication gateway to your controllers or supervision system, and check that every setpoint is applied.</p>
+                <p class="jr-you"><span>Your part</span>Site access and your contractor’s agreement.</p>
+              </div>
+            </li>
+            <li class="jr-step" data-step="4">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-4"><span class="jr-num">04</span><span class="jr-title">Observation</span><span class="jr-mode is-watch">Mayco observes</span></button></h3>
+              <div class="jr-body" id="jr-4">
+                <p>Control first runs without acting. The twin recalibrates on your site’s real measurements, which always differ a little from the model.</p>
+                <p class="jr-you"><span>Your part</span>Nothing: your machines run as usual.</p>
+              </div>
+            </li>
+            <li class="jr-step" data-step="5">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-5"><span class="jr-num">05</span><span class="jr-title">Control</span><span class="jr-mode is-live">Mayco controls</span></button></h3>
+              <div class="jr-body" id="jr-5">
+                <p>Control takes over gradually, always within your bands. Your teams are trained on fallback modes and can take back control at any time.</p>
+                <p class="jr-you"><span>Your part</span>Training for your operations team.</p>
+              </div>
+            </li>
+            <li class="jr-step" data-step="6">
+              <h3><button type="button" class="jr-head" aria-expanded="true" aria-controls="jr-6"><span class="jr-num">06</span><span class="jr-title">Follow-up</span><span class="jr-mode">Ongoing</span></button></h3>
+              <div class="jr-body" id="jr-6">
+                <p>Every month, a report: savings measured against the baseline, logged temperatures, time-stamped setpoints. A full review after twelve months, covering a winter and a summer.</p>
+                <p class="jr-you"><span>Your part</span>A regular check-in with your technical manager.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -401,6 +446,36 @@
     </div>
   </section>
 
+  <!-- TEAM -->
+  <section class="band band-frost section is-joined" id="team" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Team</p>
+        <h2 id="team-title">You deal directly with the founders.</h2>
+      </div>
+      <div class="team">
+        <article class="member">
+          <div class="member-photo"><span class="monogram" aria-hidden="true">NS</span></div>
+          <div class="member-text">
+            <h3>Nicolas Salem-Sermanet</h3>
+            <p class="member-role">Co-founder and CEO</p>
+            <p class="member-bio">CentraleSupélec engineer, specialised in energy efficiency and electricity markets. Worked in venture capital, then in energy at Thorizon and EDF.</p>
+            <p class="member-focus">Customer relations · Studies · Funding</p>
+          </div>
+        </article>
+        <article class="member">
+          <div class="member-photo"><span class="monogram" aria-hidden="true">GT</span></div>
+          <div class="member-text">
+            <h3>Gustave Triomphe</h3>
+            <p class="member-role">Co-founder and CTO</p>
+            <p class="member-bio">École polytechnique engineer, specialised in artificial intelligence: data science and deep learning. Former energy transition consultant.</p>
+            <p class="member-focus">Digital twin · Control · Flexibility</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="band band-night section" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact">
@@ -408,18 +483,12 @@
         <p class="eyebrow">Estimate</p>
         <h2 id="contact-title">Let's cost your savings on your own data<span class="dot" aria-hidden="true"></span></h2>
         <p class="lead">Tell us about your site. With a few details on your machines and consumption, we come back to you with a first costed use case, with no commitment.</p>
-        <p class="promise"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><path d="M9 4.8V9l2.8 1.8"/></svg>Reply within 2 working days</p>
         <div class="contact-direct">
           <span class="mono">Or write to us directly</span>
           <div class="mail-line">
             <a href="mailto:contact@maycoenergy.com" data-mail>contact@maycoenergy.com</a>
             <button class="copy-btn" type="button" data-copy="contact@maycoenergy.com"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4.5" y="4.5" width="8" height="8" rx="1.5"/><path d="M9.5 4.5V3a1.5 1.5 0 0 0-1.5-1.5H3A1.5 1.5 0 0 0 1.5 3v5A1.5 1.5 0 0 0 3 9.5h1.5"/></svg><span>Copy</span></button>
           </div>
-        </div>
-        <div class="founders">
-          <span class="mono">You deal directly with the founders</span>
-          <div class="founder"><span class="monogram" aria-hidden="true">NS</span><span><strong>Nicolas Salem-Sermanet</strong>CEO · CentraleSupélec engineer</span></div>
-          <div class="founder"><span class="monogram" aria-hidden="true">GT</span><span><strong>Gustave Triomphe</strong>CTO · École polytechnique engineer</span></div>
         </div>
       </div>
 
@@ -440,16 +509,8 @@
           <span class="field-error" id="f-company-err"></span>
         </div>
         <div class="field">
-          <label for="f-site">Site type <span class="opt">(optional)</span></label>
-          <select id="f-site" name="site">
-            <option value="">Select</option>
-            <option value="coldstore">Cold store</option>
-            <option value="food">Food or beverage site</option>
-            <option value="heatpump">Site with heat pumps</option>
-            <option value="esco">Operator or ESCO</option>
-            <option value="partner">Manufacturer, installer, contractor</option>
-            <option value="other">Other</option>
-          </select>
+          <label for="f-site">Sector <span class="opt">(optional)</span></label>
+          <input id="f-site" name="site" type="text" placeholder="E.g. cold storage">
         </div>
         <div class="field is-wide">
           <label for="f-size">Installed capacity or annual electricity bill <span class="opt">(optional)</span></label>
@@ -490,6 +551,7 @@
         <a href="#onboarding">Getting started</a>
         <a href="#savings">Savings</a>
         <a href="#faq">FAQ</a>
+        <a href="#team">Team</a>
       </div>
       <div class="footer-col">
         <span class="mono">Information</span>

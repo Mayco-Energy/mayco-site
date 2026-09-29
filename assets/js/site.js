@@ -23,7 +23,7 @@
       email: "Adresse e-mail invalide.",
       status: "Votre messagerie s'ouvre avec la demande pré-remplie : il ne reste qu'à l'envoyer. Si rien ne s'ouvre, écrivez-nous directement à contact@maycoenergy.com.",
       subject: "Demande de chiffrage",
-      labels: { name: "Nom", email: "E-mail", company: "Société", site: "Type de site", size: "Puissance ou facture", message: "Message" },
+      labels: { name: "Nom", email: "E-mail", company: "Société", site: "Secteur", size: "Puissance ou facture", message: "Message" },
       hourRange: function (i) { return i + "h – " + (i + 1) + "h"; },
       clock: function (h, m) { return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m; },
       tierWord: { cold: "Prix bas", amber: "Prix moyen", heat: "Prix élevé" },
@@ -50,7 +50,7 @@
       email: "Invalid email address.",
       status: "Your email app opens with the request pre-filled: just hit send. If nothing opens, write to us directly at contact@maycoenergy.com.",
       subject: "Savings estimate request",
-      labels: { name: "Name", email: "Email", company: "Company", site: "Site type", size: "Load or bill", message: "Message" },
+      labels: { name: "Name", email: "Email", company: "Company", site: "Sector", size: "Load or bill", message: "Message" },
       hourRange: function (i) { return (i < 10 ? "0" : "") + i + ":00 – " + (i + 1 < 10 ? "0" : "") + (i + 1) + ":00"; },
       clock: function (h, m) { return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m; },
       tierWord: { cold: "Low price", amber: "Mid price", heat: "High price" },
@@ -622,16 +622,86 @@
     });
   }
 
-  /* ---------- Démarrage : la ligne se remplit à l'arrivée ---------- */
+  /* ---------- Démarrage : le parcours, étape par étape ----------
+     Une étape ouverte à la fois ; l'illustration éclaire la partie du site
+     concernée. Sur grand écran, le parcours avance seul tant qu'il est visible
+     et que personne n'y touche ; le premier clic rend la main au visiteur. */
 
-  var onboard = document.querySelector("[data-onboard]");
-  if (onboard && !reduceMotion && "IntersectionObserver" in window) {
-    var obIo = new IntersectionObserver(function (e) {
-      if (!e[0].isIntersecting) return;
-      obIo.disconnect();
-      onboard.classList.add("is-running");
-    }, { threshold: 0.4 });
-    obIo.observe(onboard);
+  var journey = document.querySelector("[data-journey]");
+  if (journey) initJourney(journey);
+
+  function initJourney(root) {
+    var steps = [].slice.call(root.querySelectorAll(".jr-step"));
+    var pins = [].slice.call(root.querySelectorAll("[data-pin]"));
+    var stage = root.querySelector(".jr-stage");
+    if (!steps.length) return;
+    var DELAY = 7000;
+    var wide = window.matchMedia ? window.matchMedia("(min-width: 981px)") : { matches: true };
+    var current = 0, timer = null, visible = false, hovered = false, stopped = reduceMotion;
+
+    function show(i) {
+      current = i;
+      var n = steps[i].getAttribute("data-step");
+      steps.forEach(function (li, k) {
+        var on = k === i;
+        li.classList.toggle("is-active", on);
+        li.querySelector(".jr-head").setAttribute("aria-expanded", String(on));
+        li.querySelector(".jr-body").hidden = !on;
+      });
+      pins.forEach(function (p) {
+        var on = p.getAttribute("data-pin") === n;
+        p.classList.toggle("is-active", on);
+        if (on && stage) {
+          stage.style.setProperty("--sx", p.style.getPropertyValue("--x").trim());
+          stage.style.setProperty("--sy", p.style.getPropertyValue("--y").trim());
+        }
+      });
+      root.setAttribute("data-current", n);
+    }
+
+    function running() { return !stopped && visible && !hovered && wide.matches; }
+    function schedule() {
+      clearTimeout(timer);
+      root.classList.toggle("is-auto", running());
+      if (!running()) return;
+      // relance la barre de progression de l'étape active
+      steps.forEach(function (li) { li.classList.remove("is-timing"); });
+      void root.offsetWidth;
+      steps[current].classList.add("is-timing");
+      timer = setTimeout(function () {
+        show((current + 1) % steps.length);
+        schedule();
+      }, DELAY);
+    }
+    function takeOver(i) {
+      stopped = true;
+      show(i);
+      schedule();
+    }
+
+    root.style.setProperty("--jr-delay", DELAY + "ms");
+    steps.forEach(function (li, k) {
+      li.querySelector(".jr-head").addEventListener("click", function () { takeOver(k); });
+    });
+    pins.forEach(function (p) {
+      p.addEventListener("click", function () {
+        var k = steps.findIndex(function (li) { return li.getAttribute("data-step") === p.getAttribute("data-pin"); });
+        if (k >= 0) takeOver(k);
+      });
+    });
+    root.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { hovered = true; schedule(); } });
+    root.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hovered = false; schedule(); } });
+    root.addEventListener("focusin", function () { stopped = true; schedule(); });
+    if (wide.addEventListener) wide.addEventListener("change", schedule);
+
+    show(0);
+    root.classList.add("is-ready");
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) {
+        visible = e[0].isIntersecting;
+        schedule();
+      }, { threshold: 0.35 }).observe(root);
+    }
   }
 
   /* ---------- Économies : simulateur ---------- */
@@ -717,14 +787,12 @@
       if (!ok) { firstBad.focus(); return; }
 
       var get = function (id) { var n = document.getElementById(id); return n ? n.value.trim() : ""; };
-      var siteSel = document.getElementById("f-site");
-      var siteLabel = siteSel && siteSel.value ? siteSel.options[siteSel.selectedIndex].text : "";
       var L = T.labels;
       var lines = [
         L.name + " : " + get("f-name"),
         L.email + " : " + get("f-email"),
         L.company + " : " + get("f-company"),
-        L.site + " : " + (siteLabel || "-"),
+        L.site + " : " + (get("f-site") || "-"),
         L.size + " : " + (get("f-size") || "-"),
         "",
         get("f-message")

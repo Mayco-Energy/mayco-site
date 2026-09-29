@@ -12,9 +12,11 @@ mentions-legales.html   mentions légales et confidentialité
 assets/css/fonts.css    déclarations des polices auto-hébergées
 assets/css/site.css     styles (jetons de couleur en tête de fichier)
 assets/js/site.js       champ thermique du hero, graphique « journée type », journée qui défile
-                        dans « Comment ça marche », simulateur d'économies, menu mobile, formulaire
+                        dans « Comment ça marche », parcours « Démarrage », simulateur d'économies,
+                        menu mobile, formulaire
 assets/fonts/           Archivo et IBM Plex Mono auto-hébergées (licence SIL OFL)
-assets/img/             favicon, icône Apple, images de partage (og-fr.png, og-en.png)
+assets/img/             favicon, icône Apple, images de partage (og-fr.png, og-en.png),
+                        illustration du jumeau numérique (jumeau-numerique-*.webp)
 robots.txt, sitemap.xml, CNAME
 ```
 
@@ -22,6 +24,8 @@ robots.txt, sitemap.xml, CNAME
 
 - **Textes** : directement dans `index.html` et `en/index.html`. Les deux versions sont indépendantes : penser à répercuter une modification dans l'autre langue.
 - **Graphique du hero et journée qui défile** : mêmes données (prix spot, profils de charge, températures), objet `DAY` dans `assets/js/site.js`. Elles sont illustratives et le signalent sur la page.
+- **Parcours « Démarrage »** : six étapes dans le HTML ; chaque étape a un repère sur l'illustration (`data-pin`, position en % via `--x` et `--y`). Les libellés sont en HTML, l'image n'en contient aucun.
+- **Équipe** : pour ajouter une photo, remplacer le monogramme de `.member-photo` par une balise `<img>` (format portrait 4:5).
 - **Simulateur** : hypothèse de 20 % d'économies, dans `initEstimator` (`assets/js/site.js`).
 - **Animations** : elles se figent si le visiteur a demandé moins d'animations (réglage système) et se mettent en pause hors écran.
 - **Couleurs** : variables CSS en tête de `assets/css/site.css`. Orange = chaud / cher, ambre = moyen, bleu = froid / bon marché, comme le point du logo.
