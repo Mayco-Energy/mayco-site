@@ -92,7 +92,7 @@
         <div class="plates" aria-label="The offer in three points">
           <div class="plate">
             <span class="plate-value is-heat num">−20%</span>
-            <span class="plate-label"><strong>up to 20% savings</strong> on the bill for cooling and low-temperature heat (below 100 °C)</span>
+            <span class="plate-label"><strong>up to 20% savings</strong> on the bill for cooling and low-temperature heat (below 100 °C)</span>
           </div>
           <div class="plate">
             <span class="plate-value num">€0</span>
@@ -109,7 +109,7 @@
         <div class="synoptic-bar">
           <div class="synoptic-title">
             <span class="mono">Illustration · typical day</span>
-            <h2>Cold store at +4 °C, over 24 hours</h2>
+            <h2>Cold store at +4 °C, over 24 hours</h2>
           </div>
           <div class="seg" role="group" aria-label="Scenario shown">
             <button type="button" data-mode="fixed" aria-pressed="false">Fixed setpoint</button>
@@ -127,11 +127,11 @@
             <div class="readout">
               <span class="readout-label">Bought at expensive hours</span>
               <span class="readout-value" data-out="peak">17%</span>
-              <span class="readout-delta" data-out="peak-delta">−12 pts vs fixed setpoint</span>
+              <span class="readout-delta" data-out="peak-delta">−12 pts vs fixed setpoint</span>
             </div>
             <div class="readout">
               <span class="readout-label">Air temperature</span>
-              <span class="readout-value" data-out="temp">+1.4 → +4.0 °C</span>
+              <span class="readout-value" data-out="temp">+1.4 → +4.0 °C</span>
               <span class="readout-delta" data-out="temp-delta">within band</span>
             </div>
           </div>
@@ -290,10 +290,10 @@
           <div class="jr-stage">
             <img src="../assets/img/jumeau-numerique-1350.webp" srcset="../assets/img/jumeau-numerique-700.webp 700w, ../assets/img/jumeau-numerique-1350.webp 1350w" sizes="(max-width: 980px) calc(100vw - 32px), 640px" width="1350" height="800" loading="lazy" decoding="async" alt="Illustration of an industrial site: on the left the physical site, with its chillers, cold room, storage tanks and communication gateway; on the right, its digital twin.">
             <span class="jr-spot" aria-hidden="true"></span>
-            <span class="jr-pin" data-pin="1" style="--x: 37%; --y: 21%;" aria-hidden="true"><i></i><b>Your machines and their history</b></span>
+            <span class="jr-pin is-below" data-pin="1" style="--x: 37%; --y: 21%;" aria-hidden="true"><i></i><b>Your machines and their history</b></span>
             <span class="jr-pin" data-pin="2" style="--x: 66%; --y: 68%;" aria-hidden="true"><i></i><b>Digital twin</b></span>
             <span class="jr-pin is-left" data-pin="3" style="--x: 19%; --y: 41%;" aria-hidden="true"><i></i><b>Communication gateway</b></span>
-            <span class="jr-pin" data-pin="4" style="--x: 48.5%; --y: 26%;" aria-hidden="true"><i></i><b>Real measurements</b></span>
+            <span class="jr-pin is-below" data-pin="4" style="--x: 48.5%; --y: 26%;" aria-hidden="true"><i></i><b>Real measurements</b></span>
             <span class="jr-pin" data-pin="5" style="--x: 27%; --y: 35%;" aria-hidden="true"><i></i><b>Setpoints to the machines</b></span>
             <span class="jr-pin" data-pin="6" style="--x: 40%; --y: 32%;" aria-hidden="true"><i></i><b>Monthly report</b></span>
             <span class="jr-tag is-site" aria-hidden="true">Physical site</span>
@@ -364,11 +364,11 @@
       <div class="estimator is-first" data-estimator>
         <div class="est-head">
           <h3>How much on your site?</h3>
-          <p>The sliders are set to a typical cold store: 1.5 MWe of cooling, 9 GWh of electricity a year. Adjust them to your site.</p>
+          <p>The sliders are set to a typical cold store: 1.5 MWe of cooling, 9 GWh of electricity a year. Adjust them to your site.</p>
         </div>
         <div class="est-controls">
           <div class="est-field">
-            <div class="est-label"><label for="est-gwh">Electricity used by your chillers or heat pumps</label><output for="est-gwh" data-est-out="gwh">9 GWh/yr</output></div>
+            <div class="est-label"><label for="est-gwh">Electricity used by your chillers or heat pumps</label><output for="est-gwh" data-est-out="gwh">9 GWh/yr</output></div>
             <input id="est-gwh" type="range" min="0.5" max="30" step="0.5" value="9" style="--p: 28.8%;">
           </div>
           <div class="est-field">
@@ -514,7 +514,7 @@
         </div>
         <div class="field is-wide">
           <label for="f-size">Installed capacity or annual electricity bill <span class="opt">(optional)</span></label>
-          <input id="f-size" name="size" type="text" placeholder="E.g. 800 kW of cooling, or €600k of electricity a year">
+          <input id="f-size" name="size" type="text" placeholder="E.g. 800 kW of cooling or €600k/yr">
         </div>
         <div class="field is-wide">
           <label for="f-message">Your needs <span class="opt">(optional)</span></label>

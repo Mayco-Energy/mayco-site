@@ -13,8 +13,8 @@
       band: "plage autorisée",
       hour: "h",
       vsFixed: "vs consigne fixe",
-      money: function (v) { return v + " €"; },
-      pct: " %",
+      money: function (v) { return v + "\u00a0€"; },
+      pct: "\u00a0%",
       same: "référence",
       inBand: "dans la plage",
       copied: "Adresse copiée",
@@ -29,9 +29,9 @@
       tierWord: { cold: "Prix bas", amber: "Prix moyen", heat: "Prix élevé" },
       action: { charge: "on produit plus et on stocke le froid", draw: "on puise dans le stockage", follow: "on suit le besoin" },
       mwh: "/MWh",
-      bigMoney: function (m, k) { return m ? m + " M€" : k + " k€"; },
+      bigMoney: function (m, k) { return m ? m + "\u00a0M€" : k + "\u00a0k€"; },
       perYear: "/an",
-      gwh: " GWh/an"
+      gwh: "\u00a0GWh/an"
     },
     en: {
       price: "SPOT PRICE · €/MWh",
@@ -58,7 +58,7 @@
       mwh: "/MWh",
       bigMoney: function (m, k) { return m ? "€" + m + "M" : "€" + k + "k"; },
       perYear: "/yr",
-      gwh: " GWh/yr"
+      gwh: "\u00a0GWh/yr"
     }
   }[lang === "en" ? "en" : "fr"];
 
@@ -291,7 +291,7 @@
       var rows = [
         ["tip-h", T.hourRange(i)],
         ["tip-p is-" + tier(p), T.money(nf0.format(p)) + T.mwh],
-        ["", nf0.format(Math.round(load[i] / 10) * 10) + " kW · " + fmtTemp(Math.round(temp[i] * 10) / 10) + " °C"]
+        ["", nf0.format(Math.round(load[i] / 10) * 10) + "\u00a0kW · " + fmtTemp(Math.round(temp[i] * 10) / 10) + "\u00a0°C"]
       ];
       tip.textContent = "";
       rows.forEach(function (r) {
@@ -362,11 +362,11 @@
       var s = state.mode === "mayco" ? stats(DAY.mayco, DAY.tMayco) : base;
       out.cost.textContent = T.money(nf0.format(Math.round(s.cost / 10) * 10));
       out.peak.textContent = nf0.format(Math.round(s.peakShare * 100)) + T.pct;
-      out.temp.textContent = fmtTemp(s.tMin) + " → " + fmtTemp(s.tMax) + " °C";
+      out.temp.textContent = fmtTemp(s.tMin) + " → " + fmtTemp(s.tMax) + "\u00a0°C";
       if (state.mode === "mayco") {
         var dc = (s.cost / base.cost - 1) * 100;
         out.costD.textContent = "−" + nf0.format(Math.abs(Math.round(dc))) + T.pct + " " + T.vsFixed;
-        out.peakD.textContent = "−" + nf0.format(Math.round((base.peakShare - s.peakShare) * 100)) + " pts " + T.vsFixed;
+        out.peakD.textContent = "−" + nf0.format(Math.round((base.peakShare - s.peakShare) * 100)) + "\u00a0pts " + T.vsFixed;
         out.tempD.textContent = T.inBand;
         out.costD.classList.remove("is-flat");
         out.peakD.classList.remove("is-flat");
