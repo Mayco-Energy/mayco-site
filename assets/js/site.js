@@ -99,6 +99,91 @@
     });
   }
 
+  /* ---------- En-tête : onglets qui suivent la lecture, barre de progression ---------- */
+
+  var navInk = document.querySelector(".nav-ink");
+  var progress = document.querySelector(".scroll-progress");
+  var tabs = nav ? [].slice.call(nav.querySelectorAll('a[href^="#"]:not(.nav-cta)')) : [];
+  var tabTargets = tabs.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  var activeTab;
+
+  function placeInk(a) {
+    if (!navInk) return;
+    if (!a) { navInk.classList.remove("is-on"); return; }
+    navInk.style.width = a.offsetWidth + "px";
+    navInk.style.transform = "translateX(" + a.offsetLeft + "px)";
+    navInk.classList.add("is-on");
+  }
+  function spy() {
+    var line = window.innerHeight * 0.4, cur = null;
+    tabTargets.forEach(function (sec, k) {
+      if (!sec) return;
+      var r = sec.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) cur = tabs[k];
+    });
+    if (cur !== activeTab) {
+      tabs.forEach(function (a) {
+        a.classList.toggle("is-active", a === cur);
+        if (a === cur) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
+      });
+      activeTab = cur;
+      placeInk(cur);
+    }
+    if (progress) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = "scaleX(" + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ")";
+    }
+  }
+  if (tabs.length || progress) {
+    var spyQueued = false;
+    var queueSpy = function () {
+      if (spyQueued) return;
+      spyQueued = true;
+      requestAnimationFrame(function () { spyQueued = false; spy(); });
+    };
+    window.addEventListener("scroll", queueSpy, { passive: true });
+    window.addEventListener("resize", function () { activeTab = undefined; queueSpy(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { activeTab = undefined; spy(); });
+    spy();
+  }
+
+  /* ---------- Apparition des blocs au défilement ----------
+     Seuls les blocs encore sous la ligne de flottaison au chargement sont masqués,
+     puis révélés en entrant à l'écran ; rien ne clignote au premier affichage. */
+
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var rvIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        rvIo.unobserve(el);
+        el.classList.add("is-in");
+        el.addEventListener("transitionend", function done(e) {
+          if (e.target !== el) return;
+          el.removeEventListener("transitionend", done);
+          el.classList.remove("rv", "is-in");
+          el.style.removeProperty("--rv-d");
+        });
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    document.querySelectorAll(".section-head, .daybar, .lever, .flow .node, .flow-foot, .eco, .guard-list li, .jr-visual, .jr-list, .estimator, .pillar, .faq-list, .member, .contact > div, .contact > .form").forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      var k = el.parentElement ? [].indexOf.call(el.parentElement.children, el) : 0;
+      el.style.setProperty("--rv-d", Math.min(k, 4) * 80 + "ms");
+      el.classList.add("rv");
+      rvIo.observe(el);
+    });
+  }
+
+  /* ---------- Aperçu hors du domaine : les liens vers un dossier visent son index.html ---------- */
+
+  if (!/(^|\.)maycoenergy\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)) {
+    document.querySelectorAll("a[href]").forEach(function (a) {
+      var h = a.getAttribute("href");
+      if (/^(\.\.?\/|[a-z]+\/)$/.test(h)) a.setAttribute("href", h + "index.html");
+    });
+  }
+
   /* ---------- CTA collant mobile : visible après le hero, masqué sur le formulaire ---------- */
 
   var mobileCta = document.querySelector("[data-mobile-cta]");

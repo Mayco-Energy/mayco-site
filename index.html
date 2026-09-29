@@ -55,6 +55,7 @@
       </svg>
     </a>
     <nav class="nav" id="nav" aria-label="Navigation principale">
+      <span class="nav-ink" aria-hidden="true"></span>
       <a href="#solution">Comment ça marche</a>
       <a href="#garanties">Garanties</a>
       <a href="#demarrage">Démarrage</a>
@@ -71,6 +72,7 @@
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span class="bars"></span></button>
     </div>
   </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 </header>
 
 <main id="contenu">
@@ -254,19 +256,19 @@
       </div>
       <ul class="guard-list is-wide">
           <li>
-            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cold-ink);" aria-hidden="true"><circle cx="11" cy="11" r="9.5"/><path d="M6.8 11.3l2.9 2.9 5.6-6"/></svg>
+            <svg class="guard-icon" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 4.8a2.3 2.3 0 0 1 4.6 0v8a4.2 4.2 0 1 1-4.6 0Z"/><path d="M10.8 9.5v5.3"/><path d="M16.2 6.5h3.3M16.2 10.5h3.3"/></svg>
             <span><strong>Dans votre plage de température</strong>Le pilotage reste dans les bornes que vous fixez. Températures et consignes sont tracées et horodatées.</span>
           </li>
           <li>
-            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cold-ink);" aria-hidden="true"><circle cx="11" cy="11" r="9.5"/><path d="M6.8 11.3l2.9 2.9 5.6-6"/></svg>
+            <svg class="guard-icon" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2.2 4.2 4.8v5.4c0 4.3 2.9 7.8 6.8 9.3 3.9-1.5 6.8-5 6.8-9.3V4.8Z"/><path d="m7.9 10.9 2.2 2.2 4.2-4.4"/></svg>
             <span><strong>Sécurités intactes</strong>Automates, sécurités constructeur et régulation d'origine restent en place. Mayco transmet des consignes et ne remplace rien.</span>
           </li>
           <li>
-            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cold-ink);" aria-hidden="true"><circle cx="11" cy="11" r="9.5"/><path d="M6.8 11.3l2.9 2.9 5.6-6"/></svg>
+            <svg class="guard-icon" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7.5h8.2a4.3 4.3 0 0 1 0 8.6H8"/><path d="M8.8 4.3 5.6 7.5l3.2 3.2"/></svg>
             <span><strong>Repli automatique</strong>Si la liaison est coupée, vos machines reprennent d'elles-mêmes leur régulation habituelle.</span>
           </li>
           <li>
-            <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--cold-ink);" aria-hidden="true"><circle cx="11" cy="11" r="9.5"/><path d="M6.8 11.3l2.9 2.9 5.6-6"/></svg>
+            <svg class="guard-icon" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.6 3.2a4.3 4.3 0 0 0-4.1 5.7l-6.3 6.3a1.9 1.9 0 0 0 2.7 2.7l6.3-6.3a4.3 4.3 0 0 0 5.7-4.1l-2.6 2.6-2.8-.9-.9-2.8Z"/></svg>
             <span><strong>Votre mainteneur garde la main</strong>La maintenance reste chez votre frigoriste ou votre installateur, avec qui nous travaillons.</span>
           </li>
         </ul>
@@ -477,7 +479,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="band band-night section" id="contact" aria-labelledby="contact-title">
+  <section class="band band-night section has-glow" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact">
       <div>
         <p class="eyebrow">Chiffrage</p>

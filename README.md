@@ -25,6 +25,7 @@ robots.txt, sitemap.xml, CNAME
 - **Textes** : directement dans `index.html` et `en/index.html`. Les deux versions sont indépendantes : penser à répercuter une modification dans l'autre langue.
 - **Graphique du hero et journée qui défile** : mêmes données (prix spot, profils de charge, températures), objet `DAY` dans `assets/js/site.js`. Elles sont illustratives et le signalent sur la page.
 - **Parcours « Démarrage »** : six étapes dans le HTML ; chaque étape a un repère sur l'illustration (`data-pin`, position en % via `--x` et `--y`). Les libellés sont en HTML, l'image n'en contient aucun.
+- **En-tête** : les liens de section se comportent comme des onglets (pastille sous la section en cours, barre de lecture). Les blocs apparaissent au défilement ; rien n'est masqué sans JavaScript.
 - **Équipe** : pour ajouter une photo, remplacer le monogramme de `.member-photo` par une balise `<img>` (format portrait 4:5).
 - **Simulateur** : hypothèse de 20 % d'économies, dans `initEstimator` (`assets/js/site.js`).
 - **Animations** : elles se figent si le visiteur a demandé moins d'animations (réglage système) et se mettent en pause hors écran.
