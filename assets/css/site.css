@@ -1548,7 +1548,6 @@ p { margin: 0; }
   color: var(--accent-ink);
 }
 .member-bio { margin-top: 14px; color: var(--muted); font-size: 0.975rem; line-height: 1.55; }
-.member-focus { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 0.925rem; font-weight: 500; }
 @media (max-width: 1040px) { .team { grid-template-columns: 1fr; } }
 @media (max-width: 560px) {
   .member { grid-template-columns: 1fr; }
